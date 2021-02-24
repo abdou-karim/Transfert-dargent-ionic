@@ -17,6 +17,42 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *      normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}},
+ *     attributes={
+ *           "pagination_enabled"=true,
+ *          "pagination_items_per_page"=10,
+ *     },
+ *     collectionOperations={
+ *          "get_Caissier"={
+ *              "method"="GET",
+ *              "path"="/adminSysteme/caissier",
+ *               "security_message"="Seul les adminSysteme sont autorise !",
+ *              "security"= "is_granted('ROLE_AdminSysteme')",
+ *     },
+ *     "get_userAgence"={
+ *      "method"="GET",
+ *     "path"="/adminAgence/userAgence",
+ *     "security_message"="Seul les adminAgence sont autorise !",
+ *      "security"= "is_granted('ROLE_AdminAgence')",
+ *     },
+ *     "post_Caissier"={
+ *      "method"="POST",
+ *     "path"="/adminSysteme/caissier",
+ *      "security_message"="Seul les adminSysteme sont autorise !",
+ *       "security"= "is_granted('ROLE_AdminSysteme')",
+ *     },
+ *     "post_userAgence"={
+ *      "method"="POST",
+ *      "path"="/adminAgence/userAgence",
+ *      "security_message"="Seul les adminAgence sont autorise !",
+ *      "security"= "is_granted('ROLE_AdminAgence')",
+ *     },
+ *     },
+ *     itemOperations={
+ *          "GET",
+ *          "PUT",
+ *          "DELETE"
+ *     },
+ *
  * )
  */
 class User implements UserInterface
@@ -27,6 +63,7 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      * @Groups("user:read")
      * @Groups("compte:read")
+     * @Groups({"profile:read"})
      */
     private $id;
 
@@ -34,6 +71,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
+     * @Groups({"profile:read"})
      * @Assert\NotBlank
      */
     private $username;
@@ -57,6 +95,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
+     * @Groups({"profile:read"})
      */
     private $email;
 
@@ -64,6 +103,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
+     * @Groups({"profile:read"})
      */
     private $telephone;
 
@@ -71,6 +111,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
+     * @Groups({"profile:read"})
      */
     private $prenom;
 
@@ -78,6 +119,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
+     * @Groups({"profile:read"})
      */
     private $nom;
 
@@ -110,6 +152,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="user")
      */
     private $transactions;
+
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $avatar;
 
     public function __construct()
     {
@@ -351,5 +398,17 @@ class User implements UserInterface
     public function setPlainPassword($plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 }

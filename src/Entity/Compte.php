@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CompteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -41,12 +43,14 @@ class Compte
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups("compte:read")
+     * @Groups({"trans_compte:read", "trans_compte:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"compte:read", "compte:write"})
+     * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Assert\NotBlank
      */
     private $numeroCompte;
@@ -54,6 +58,7 @@ class Compte
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"compte:read", "compte:write"})
+     * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Assert\NotBlank
      */
     private $solde;
@@ -83,6 +88,16 @@ class Compte
      * @ORM\Column(type="boolean")
      */
     private $archivage;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="compte")
+     */
+    private $transaction;
+
+    public function __construct()
+    {
+        $this->transaction = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -157,6 +172,36 @@ class Compte
     public function setArchivage(bool $archivage): self
     {
         $this->archivage = $archivage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Transaction[]
+     */
+    public function getTransaction(): Collection
+    {
+        return $this->transaction;
+    }
+
+    public function addTransaction(Transaction $transaction): self
+    {
+        if (!$this->transaction->contains($transaction)) {
+            $this->transaction[] = $transaction;
+            $transaction->setCompte($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): self
+    {
+        if ($this->transaction->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getCompte() === $this) {
+                $transaction->setCompte(null);
+            }
+        }
 
         return $this;
     }

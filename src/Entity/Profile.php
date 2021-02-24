@@ -2,14 +2,39 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\ProfileRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ORM\Entity(repositoryClass=ProfileRepository::class)
+ * @ApiFilter(BooleanFilter::class, properties={"archivage"})
+ * @ApiResource(
+ *      normalizationContext={"groups"={"profile:read"}},
+ *     denormalizationContext={"groups"={"profile:write"}},
+ *     routePrefix="adminSysteme",
+ *     attributes={
+ *       "pagination_enabled"=true,
+ *          "pagination_items_per_page"=2,
+ *      "security_message"="Acces non autorisé",
+ *     "security"= "is_granted('ROLE_AdminSysteme')",
+ *     },
+ *     collectionOperations={
+ *          "GET",
+ *          "POST",
+ *     },
+ *     itemOperations={
+ *          "GET",
+ *          "PUT",
+ *          "DELETE"
+ *     },
+ *     )
  *
  */
 class Profile
@@ -19,6 +44,7 @@ class Profile
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"user:read", "user:write"})
+     * @Groups({"profile:read", "profile:write"})
      */
     private $id;
 
@@ -26,6 +52,7 @@ class Profile
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      * @Groups({"compte:read", "compte:write"})
+     * @Groups({"profile:read", "profile:write"})
      */
     private $libelle;
 
@@ -37,6 +64,8 @@ class Profile
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="profile")
+     * @Groups({"profile:read"})
+     * @ApiSubresource()
      */
     private $users;
 

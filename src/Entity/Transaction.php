@@ -2,11 +2,39 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TransactionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=TransactionRepository::class)
+ * @ApiResource(
+ *     routePrefix="transaction",
+ *     attributes={},
+ *     collectionOperations={
+ *          "GET",
+ *           "Recharge_compte"={
+ *              "method"="POST",
+ *              "path"="/compte",
+ *              "security_message"="Acces non autorisé",
+ *              "security"= "is_granted('ROLE_AdminSysteme') or is_granted('ROLE_Caissier')",
+ *              "normalization_context"={"groups"={"trans_compte:read"}},
+ *              "denormalization_context"={"groups"={"trans_compte:write"}},
+ *     },
+ *          "Transfert_client"={
+ *              "method"="POST",
+ *              "path"="/client",
+ *              "security_message"="Acces non autorisé",
+ *              "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_Caissier')",
+ *     }
+ *     },
+ *     itemOperations={
+ *          "GET",
+ *          "PUT",
+ *          "DELETE"
+ *     },
+ *     )
  */
 class Transaction
 {
@@ -14,51 +42,55 @@ class Transaction
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"trans_compte:read", "trans_compte:write"})
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"trans_compte:read", "trans_compte:write"})
      */
     private $montant;
 
     /**
      * @ORM\Column(type="date")
+     * @Groups({"trans_compte:read", "trans_compte:write"})
      */
     private $dateTransfert;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date",nullable=true)
      */
-    private $dateDexpiration;
+    private $dateRetrait;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"trans_compte:read", "trans_compte:write"})
      */
     private $type;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $partEtat;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $partEntreprise;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $partAgence;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $partAgenceDepot;
 
@@ -71,6 +103,12 @@ class Transaction
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="transaction")
      */
     private $client;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Compte::class, inversedBy="transaction",cascade={"persist", "remove"})
+     * @Groups({"trans_compte:read", "trans_compte:write"})
+     */
+    private $compte;
 
     public function getId(): ?int
     {
@@ -113,14 +151,14 @@ class Transaction
         return $this;
     }
 
-    public function getDateDexpiration(): ?\DateTimeInterface
+    public function getDateRetrait(): ?\DateTimeInterface
     {
-        return $this->dateDexpiration;
+        return $this->dateRetrait;
     }
 
-    public function setDateDexpiration(\DateTimeInterface $dateDexpiration): self
+    public function setDateDexpiration(\DateTimeInterface $dateRetrait): self
     {
-        $this->dateDexpiration = $dateDexpiration;
+        $this->dateRetrait = $dateRetrait;
 
         return $this;
     }
@@ -205,6 +243,18 @@ class Transaction
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getCompte(): ?Compte
+    {
+        return $this->compte;
+    }
+
+    public function setCompte(?Compte $compte): self
+    {
+        $this->compte = $compte;
 
         return $this;
     }
