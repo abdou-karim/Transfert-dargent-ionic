@@ -35,12 +35,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
-    public function getUserCaissier(){
+    public function getUsersSpeciale($type){
         $query = $this->createQueryBuilder('u')
             ->select('u,p')
             ->join('u.profile','p')
             ->where('p.libelle=:val')
-            ->setParameter('val','Caissier')
+            ->setParameter('val',$type)
             ;
         return $query;
     }

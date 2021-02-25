@@ -27,6 +27,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "path"="/client",
  *              "security_message"="Acces non autorisé",
  *              "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_Caissier')",
+ *               "normalization_context"={"groups"={"trans_client:read"}},
+ *              "denormalization_context"={"groups"={"trans_client:write"}},
  *     }
  *     },
  *     itemOperations={
@@ -43,23 +45,27 @@ class Transaction
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"trans_compte:read", "trans_compte:write"})
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $code;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"trans_compte:read", "trans_compte:write"})
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $montant;
 
     /**
      * @ORM\Column(type="date")
      * @Groups({"trans_compte:read", "trans_compte:write"})
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $dateTransfert;
 
@@ -71,16 +77,19 @@ class Transaction
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"trans_compte:read", "trans_compte:write"})
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $partEtat;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $partEntreprise;
 
@@ -91,6 +100,7 @@ class Transaction
 
     /**
      * @ORM\Column(type="integer",nullable=true)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $partAgenceDepot;
 
@@ -100,7 +110,8 @@ class Transaction
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="transaction")
+     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="transaction",cascade={"persist", "remove"})
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $client;
 

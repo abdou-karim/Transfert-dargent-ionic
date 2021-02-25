@@ -5,6 +5,8 @@ namespace App\DataPersister;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -36,20 +38,6 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
      */
     public function persist($data, array $context = [])
     {
-        dd($data);
-        if ($data->getPlainPassword()) {
-            $data->setPassword(
-                $this->_passwordEncoder->encodePassword(
-                    $data,
-                    $data->getPlainPassword()
-                )
-            );
-
-            $data->eraseCredentials();
-        }
-
-        $this->_entityManager->persist($data);
-        $this->_entityManager->flush();
     }
 
     /**
@@ -57,7 +45,28 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
      */
     public function remove($data, array $context = [])
     {
-        $this->_entityManager->remove($data);
-        $this->_entityManager->flush();
+
+        if($context['item_operation_name'] === "delete_caissier"){
+            $profile = $data->getProfile();
+            if($profile->getLibelle() === "Caissier"){
+                $data->setArchivage(true);
+                $this->_entityManager->flush();
+            }
+            else{
+                throw new \RuntimeException("Vous ne pouvez supprimer qu'un Caissier");
+            }
+
+        }
+        if($context['item_operation_name'] ==="delete_userAgence" ){
+
+            $profile = $data->getProfile();
+            if($profile->getLibelle() === "UtilisateurAgence"){
+                $data->setArchivage(true);
+                $this->_entityManager->flush();
+            }
+            else{
+                throw new \RuntimeException("Vous ne pouvez supprimer qu'un Utilisateur Agence");
+            }
+        }
     }
 }

@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @ApiResource
  */
 class Client
 {
@@ -16,31 +19,37 @@ class Client
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $nomClient;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $numeroClient;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $nomBeneficiaire;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $numeroBeneficiaire;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $cniBeneficiaire;
 

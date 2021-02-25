@@ -37,20 +37,43 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     "post_Caissier"={
  *      "method"="POST",
  *     "path"="/adminSysteme/caissier",
- *      "security_message"="Seul les adminSysteme sont autorise !",
- *       "security"= "is_granted('ROLE_AdminSysteme')",
+ *     "route_name"="caissier_post",
  *     },
  *     "post_userAgence"={
  *      "method"="POST",
  *      "path"="/adminAgence/userAgence",
- *      "security_message"="Seul les adminAgence sont autorise !",
- *      "security"= "is_granted('ROLE_AdminAgence')",
+ *     "route_name"="userAgence_post",
+
  *     },
  *     },
  *     itemOperations={
  *          "GET",
- *          "PUT",
- *          "DELETE"
+ *          "put_caissier"={
+ *            "method"="PUT",
+ *            "path"="/adminSysteme/caissier/{id}",
+ *             "route_name"="caissier_put",
+ *
+ *     },
+ *     "put_userAgence"={
+ *      "method"="PUT",
+ *     "path"="/adminAgence/userAgence/{id}",
+ *     "route_name"="userAgence_put",
+ *
+ *     },
+ *
+ *          "delete_caissier"={
+ *          "method"="DELETE",
+ *          "path"="/adminSysteme/caissier/{id}",
+ *           "security_message"="Seul les adminSysteme sont autorise !",
+ *           "security"= "is_granted('ROLE_AdminSysteme')",
+ *     },
+ *     "delete_userAgence"={
+ *          "method"="DELETE",
+ *          "path"="/adminAgence/userAgence/{id}",
+ *           "security_message"="Seul les adminAgence sont autorise !",
+ *           "security"= "is_granted('ROLE_AdminAgence')",
+ *
+ *     },
  *     },
  *
  * )
@@ -86,7 +109,6 @@ class User implements UserInterface
     private $password;
     /**
      * @Groups("user:write")
-     * @Assert\NotBlank
      * @SerializedName("password")
      */
     private $plainPassword;

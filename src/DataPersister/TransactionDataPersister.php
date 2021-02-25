@@ -33,6 +33,11 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
           $this->entityManager->persist($compte);
           $this->entityManager->flush();
       }
+      if($context['collection_operation_name'] ==="Transfert_client"){
+          $data->setUser($this->security->getUser());
+          $this->entityManager->persist($data);
+          $this->entityManager->flush();
+      }
     }
 
     public function remove($data, array $context = [])

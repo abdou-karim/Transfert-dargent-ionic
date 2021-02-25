@@ -34,7 +34,17 @@ class UserGetCollectionDataProvider implements ContextAwareCollectionDataProvide
        if($operationName==="get_Caissier"){
            $manager = $this->managerRegistry->getManagerForClass($resourceClass);
            $repository = $manager->getRepository($resourceClass);
-           $userRepo = $repository->getUserCaissier();
+           $userRepo = $repository->getUsersSpeciale('Caissier');
+           $this->paginationExtension->applyToCollection($userRepo, new QueryNameGenerator(), $resourceClass, $operationName,$context);
+           if($userRepo !== null){
+
+               return $userRepo->getQuery()->getResult();
+           }
+       }
+       if($operationName ==="get_userAgence"){
+           $manager = $this->managerRegistry->getManagerForClass($resourceClass);
+           $repository = $manager->getRepository($resourceClass);
+           $userRepo = $repository->getUsersSpeciale('UtilisateurAgence');
            $this->paginationExtension->applyToCollection($userRepo, new QueryNameGenerator(), $resourceClass, $operationName,$context);
            if($userRepo !== null){
 
