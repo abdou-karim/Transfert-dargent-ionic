@@ -3,6 +3,7 @@ namespace App\DataPersister;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Compte;
 use App\Repository\UserRepository;
+use App\Service\Frais;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -44,11 +45,12 @@ class CompteDataPersister implements ContextAwareDataPersisterInterface
         $jwtHeader = json_decode($tokenHeader);
         $jwtPayload = json_decode($tokenPayload);
        $currentUser= $this->userRepository->findOneBy(['username'=>$jwtPayload->username]);*/
-        if($data->getSolde()< 700000){
-            return new JsonResponse("Un compte doit etre initialiser avec au moins 700mille fcf",500);
-        }
             $data->setUser($this->security->getUser());
+            $data->setNumeroCompte(uniqid('',true));
+            $data->setDateCreationCompte(new \DateTime('now'));
+            $data->setSolde(700000);
             $data -> setArchivage(false);
+            $data->getAgencePartenaire()->setArchivage(false);
             $this->_entityManager->persist($data);
             $this->_entityManager->flush();
 

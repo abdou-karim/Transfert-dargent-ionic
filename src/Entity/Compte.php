@@ -51,7 +51,6 @@ class Compte
      * @ORM\Column(type="string", length=255)
      * @Groups({"compte:read", "compte:write"})
      * @Groups({"trans_compte:read", "trans_compte:write"})
-     * @Assert\NotBlank
      */
     private $numeroCompte;
 
@@ -59,17 +58,14 @@ class Compte
      * @ORM\Column(type="string", length=255)
      * @Groups({"compte:read", "compte:write"})
      * @Groups({"trans_compte:read", "trans_compte:write"})
-     * @Assert\NotBlank
      */
     private $solde;
 
     /**
      * @ORM\Column(type="date")
      * @Groups({"compte:read", "compte:write"})
-     * @Assert\NotBlank
-     *
      */
-    private $dateRechargement;
+    private $dateCreationCompte;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comptes")
@@ -128,14 +124,14 @@ class Compte
         return $this;
     }
 
-    public function getDateRechargement(): ?\DateTimeInterface
+    public function getDateCreationCompte(): ?\DateTimeInterface
     {
-        return $this->dateRechargement;
+        return $this->dateCreationCompte;
     }
 
-    public function setDateRechargement(\DateTimeInterface $dateRechargement): self
+    public function setDateCreationCompte(\DateTimeInterface $dateCreationCompte): self
     {
-        $this->dateRechargement = $dateRechargement;
+        $this->dateCreationCompte = $dateCreationCompte;
 
         return $this;
     }

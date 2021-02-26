@@ -11,7 +11,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *     collectionOperations={"GET","POST"},
+ *     itemOperations={"GET"={"defaults"={"id"=null},},"PUT","DELETE"}
+ * )
  */
 class Client
 {
@@ -24,31 +27,31 @@ class Client
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $nomClient;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $numeroClient;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $nomBeneficiaire;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $numeroBeneficiaire;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $cniBeneficiaire;

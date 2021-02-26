@@ -32,7 +32,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     }
  *     },
  *     itemOperations={
- *          "GET",
+ *          "GET"={"defaults"={"id"=null},},
  *          "PUT",
  *          "DELETE"
  *     },
@@ -96,7 +96,7 @@ class Transaction
     /**
      * @ORM\Column(type="integer",nullable=true)
      */
-    private $partAgence;
+    private $partAgenceRetrait;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
@@ -210,14 +210,14 @@ class Transaction
         return $this;
     }
 
-    public function getPartAgence(): ?int
+    public function getPartAgenceRetrait(): ?int
     {
-        return $this->partAgence;
+        return $this->partAgenceRetrait;
     }
 
-    public function setPartAgence(int $partAgence): self
+    public function setPartAgence(int $partAgenceRetrait): self
     {
-        $this->partAgence = $partAgence;
+        $this->partAgenceRetrait = $partAgenceRetrait;
 
         return $this;
     }
