@@ -17,7 +17,8 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
     private $transactionRepository;
 
     public function __construct(Security $security,CompteRepository $compteRepository,
-                                EntityManagerInterface $entityManager, Frais $frais,TransactionRepository $transactionRepository){
+                                EntityManagerInterface $entityManager, Frais $frais,
+                                TransactionRepository $transactionRepository){
         $this->security = $security;
         $this->compteRepository = $compteRepository;
         $this->entityManager = $entityManager;
@@ -50,7 +51,10 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
           $partAgenceRetrait = $frait*0.02;
           if($data->getType() === "depot")
           {
+              $agentP=$this->security->getUser()->getAgencePartenaire();
 
+              $comp = $this->compteRepository->getCompte($agentP->getId());
+              $comp->setSolde($comp->getSolde() + $partAgenceDepot);
               $data->setPartEtat($parEtat);
               $data->setCode($this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire(),$data->getClient()->getNumeroBeneficiaire()));
               $data->setPartEntreprise($partEntrePrise);
@@ -61,6 +65,7 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
           }
         if($data->getType()==="retrait"){
             $code = $data->getCode();
+            $agentP=$this->security->getUser()->getAgencePartenaire();
             $transaction = $this->transactionRepository->findOneBy(['code'=>$code]);
             $client =  $transaction->getClient();
             $client->setCniBeneficiaire($data->getClient()->getCniBeneficiaire());
@@ -76,6 +81,8 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
                $trans->setPartAgence($partAgenceRetrait);
                $trans->setPartAgenceDepot($transaction->getPartAgenceDepot());
                $trans->setClient($client);
+                $comp = $this->compteRepository->getCompte($agentP->getId());
+                $comp->setSolde($comp->getSolde() + $partAgenceRetrait);
                $trans->setDateDexpiration(new \DateTime('now'));
                 $this->entityManager->persist($client);
                 $this->entityManager->persist($trans);
