@@ -1,0 +1,7 @@
+{
+  "name": "transfert-dargent-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
