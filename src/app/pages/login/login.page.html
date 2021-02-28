@@ -1,0 +1,42 @@
+<ion-app>
+<ion-header>
+  <ion-toolbar>
+    <ion-card>
+      <ion-card-header>
+        <img src="assets/images/Logo%20MONEY%20SA%201.png" alt="moneySa">
+      </ion-card-header>
+      <div class="footer">
+       <p>Login</p>
+      </div>
+    </ion-card>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div class="mycontent">
+  <ion-item>
+    <ion-label position="floating">Telephonne</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  <ion-item>
+    <br>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password"></ion-input>
+  </ion-item>
+  <br>
+  <div style="margin-left: 15px">
+    <ion-label style="color: #07AEEF">Mot de passe oublié?</ion-label>
+  </div>
+  <ion-item class="btnSubmit">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="ion-align-self-center">
+          <ion-button shape="round" expand="block" color="secondary" (click)="goAdminAgence()">Se connecter</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</div>
+
+</ion-content>
+</ion-app>

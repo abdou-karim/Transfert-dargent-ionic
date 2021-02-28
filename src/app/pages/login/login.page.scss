@@ -1,0 +1,33 @@
+.footer{
+  margin: 25% auto;text-align: center;
+  border-bottom: 5px solid #07AEEF;
+  width: 25%;
+  font-weight: bold;
+}
+ion-card{
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  margin: 0;
+  padding: 0;
+  height: 40vh;
+}
+ion-content{
+  background: #E5E5E5;
+}
+.mycontent{
+  width: 100%;
+margin: 15% auto;
+  text-align: center;
+}
+.btnSubmit{
+  margin: 5% auto;
+}
+ion-card-header{
+  text-align: center;
+}
+ion-content {
+  --ion-background-color:#E5E5E5;
+}
+ion-button{
+  height: 7vh;
+}
