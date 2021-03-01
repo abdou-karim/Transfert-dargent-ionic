@@ -7,14 +7,15 @@ import {IonicModule} from '@ionic/angular';
 import { AdminAgencePageRoutingModule } from './admin-agence-routing.module';
 
 import { AdminAgencePage } from './admin-agence.page';
+import {MenuComponent} from './menu/menu.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdminAgencePageRoutingModule
+    AdminAgencePageRoutingModule,
   ],
-  declarations: [AdminAgencePage]
+  declarations: [AdminAgencePage, MenuComponent]
 })
 export class AdminAgencePageModule {}
