@@ -27,6 +27,12 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *     },
  *     collectionOperations={
  *          "GET",
+ *          "adminAgence_compte"={
+ *              "method"="GET",
+ *              "path"="/adminAgence/compte",
+ *             "security"= " is_granted('ROLE_AdminAgence') or is_granted('ROLE_UtilisateurAgence')",
+ *              "security_message"="Acces non autorisé",
+ *     },
  *          "POST",
  *     },
  *     itemOperations={

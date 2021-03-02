@@ -54,9 +54,9 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
               $agentP=$this->security->getUser()->getAgencePartenaire();
 
               $comp = $this->compteRepository->getCompte($agentP->getId());
-              $comp->setSolde($comp->getSolde() + $partAgenceDepot);
+              $comp->setSolde(($comp->getSolde()-$data->getMontant()) + $partAgenceDepot);
               $data->setPartEtat($parEtat);
-              $data->setCode($this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire(),$data->getClient()->getNumeroBeneficiaire()));
+              $data->setCode($this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire()));
               $data->setPartEntreprise($partEntrePrise);
               $data->setPartAgenceDepot($partAgenceDepot);
               $data->setDateTransfert(new \DateTime('now'));
@@ -82,7 +82,7 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
                $trans->setPartAgenceDepot($transaction->getPartAgenceDepot());
                $trans->setClient($client);
                 $comp = $this->compteRepository->getCompte($agentP->getId());
-                $comp->setSolde($comp->getSolde() + $partAgenceRetrait);
+                $comp->setSolde($comp->getSolde() + $transaction->getMontant() + $partAgenceRetrait);
                $trans->setDateDexpiration(new \DateTime('now'));
                 $this->entityManager->persist($client);
                 $this->entityManager->persist($trans);

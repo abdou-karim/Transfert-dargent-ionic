@@ -20,16 +20,15 @@ class Frais {
             }
         }
     }
-    public function CreerMatricule($nom,$prenom,$numCni)
+    public function CreerMatricule($nom,$prenom)
     {
 
         $num=intval(uniqid(rand(100,999)));
         $dernier=strlen($prenom);
-        $numC = strlen($numCni)-2;
         $avantDernier=$dernier-2;
         $cc=substr( $nom, 0,2);
         $ll=substr($prenom,$avantDernier,$dernier);
 
-        return date('Y').strtoupper($cc).strtoupper($ll).$num.$numC;
+        return date('Y').strtoupper($cc).strtoupper($ll).$num.rand(0,9);
     }
 }
