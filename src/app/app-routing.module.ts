@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -17,12 +17,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'admin-agence',
-    loadChildren: () => import('./pages/admin-agence/admin-agence.module').then( m => m.AdminAgencePageModule), canActivate: [AuthGuard]
-  },
-  {
     path: 'depot',
     loadChildren: () => import('./pages/depot/depot.module').then( m => m.DepotPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'calculateur-frais',
+    loadChildren: () => import('./pages/calculateur-frais/calculateur-frais.module').then( m => m.CalculateurFraisPageModule)
   },
 ];
 

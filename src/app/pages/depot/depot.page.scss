@@ -10,7 +10,7 @@ ion-app{
       border-bottom-right-radius: 10%;
       margin: 0;
       padding: 0;
-      height: 40vh;
+      height: 25vh;
       ion-card-header
       {
         text-align: center;
@@ -31,13 +31,14 @@ ion-app{
     {
       width: auto;
       height: 50px;
-      border-radius: 10%;
+      border-radius: 1%;
       background: white;
-      margin: 5% auto;
+      margin: 2% auto;
     }
-    .content
+    .routerOutlet
     {
-      margin: 10% auto;
+     width: auto;
+      height:55vh;
     }
   }
 }

@@ -1,0 +1,23 @@
+<ion-app>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+
+      <ion-tab-button tab="admin-agence">
+        <ion-icon name="home"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="/">
+        <ion-icon name="time-outline"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="/" *ngIf="permission">
+       <ion-icon src="assets/images/100icon.svg"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="calcule-frais">
+        <ion-icon src="assets/images/calculateur de frais.svg"></ion-icon>
+      </ion-tab-button>
+
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-app>

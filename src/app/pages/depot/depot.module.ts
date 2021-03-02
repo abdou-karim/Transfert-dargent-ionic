@@ -15,7 +15,7 @@ import {BeneficiaireComponent} from './beneficiaire/beneficiaire.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    DepotPageRoutingModule
+    DepotPageRoutingModule,
   ],
   declarations: [DepotPage, EmetteurComponent, BeneficiaireComponent]
 })

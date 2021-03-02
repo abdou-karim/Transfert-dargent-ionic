@@ -53,7 +53,7 @@ export class AuthService {
     const helper = new JwtHelperService();
     const decodeToken = helper.decodeToken(token);
     if (decodeToken.roles[0] === 'ROLE_AdminAgence' || decodeToken.roles[0] === 'ROLE_UtilisateurAgence') {
-      this.router.navigateByUrl('admin-agence');
+      this.router.navigateByUrl('tabs/admin-agence');
       return decodeToken.roles[0];
     }
   }
