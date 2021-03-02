@@ -5,7 +5,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModules } from './app-routing.modules';
+import { AppRoutingModule } from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
@@ -17,7 +17,7 @@ import {ErrorInterceptor} from './_helpers/error.interceptor';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModules,
+    AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
