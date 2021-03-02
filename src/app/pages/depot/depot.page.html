@@ -1,0 +1,34 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-card class="mayCarde">
+        <ion-card-header>
+          <img src="assets/images/Logo%20MONEY%20SA%201.png" alt="moneySa">
+        </ion-card-header>
+        <div class="footer">
+          <ion-item>
+            <ion-icon name="return-up-forward-outline" slot="start" ></ion-icon>
+            <ion-label>Depot</ion-label>
+          </ion-item>
+        </div>
+      </ion-card>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="btnRoute">
+      <ion-segment>
+        <ion-segment-button value="friends" routerLink="emetteur">
+          <ion-label>Friends</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="" routerLink="beneficiaire">
+          <ion-label>Enemies</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </ion-content>
+
+</ion-app>
+

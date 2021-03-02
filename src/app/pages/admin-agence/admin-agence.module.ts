@@ -13,7 +13,7 @@ import {MenuComponent} from './menu/menu.component';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule.forRoot(),
     AdminAgencePageRoutingModule,
   ],
   declarations: [AdminAgencePage, MenuComponent]

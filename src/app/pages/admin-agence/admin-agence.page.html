@@ -1,4 +1,22 @@
 <ion-app>
 <app-menu></app-menu>
+  <div>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="schedule">
+        <img src="assets/images/home.png" alt="">
+      </ion-tab-button>
 
+      <ion-tab-button tab="speakers">
+        <img src="assets/images/historique.png" alt="">
+      </ion-tab-button>
+
+      <ion-tab-button tab="map" *ngIf="permission">
+        <img src="assets/images/100.png" alt="">
+      </ion-tab-button>
+
+      <ion-tab-button tab="about">
+        <img src="assets/images/calculateur%20de%20frais.png" alt="">
+      </ion-tab-button>
+    </ion-tab-bar>
+  </div>
 </ion-app>

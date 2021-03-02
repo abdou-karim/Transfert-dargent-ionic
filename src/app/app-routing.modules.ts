@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {AuthGuard} from './_guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -8,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -17,7 +18,11 @@ const routes: Routes = [
   },
   {
     path: 'admin-agence',
-    loadChildren: () => import('./pages/admin-agence/admin-agence.module').then( m => m.AdminAgencePageModule)
+    loadChildren: () => import('./pages/admin-agence/admin-agence.module').then( m => m.AdminAgencePageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'depot',
+    loadChildren: () => import('./pages/depot/depot.module').then( m => m.DepotPageModule), canActivate: [AuthGuard]
   },
 ];
 
@@ -27,4 +32,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModules {}
+

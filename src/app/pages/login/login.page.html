@@ -13,30 +13,46 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="loginForm" (ngSubmit)="authUser()">
+
+
 <div class="mycontent">
-  <ion-item>
+  <ion-item [mode]="'ios' || 'md'">
     <ion-label position="floating">Telephonne</ion-label>
-    <ion-input></ion-input>
+    <ion-input formControlName="username" [ngClass]="{'is-valid': submitted && f.username.errors}" required=""></ion-input>
   </ion-item>
-  <ion-item>
-    <br>
+  <div  *ngIf="f.username.errors && submitted">
+    <ng-container>
+      <div class="error-message" *ngIf="f.username.errors.required"> Numero obligatoire *</div>
+
+    </ng-container>
+  </div>
+
+  <ion-item [mode]="'ios' || 'md'">
     <ion-label position="floating">Password</ion-label>
-    <ion-input type="password"></ion-input>
+    <ion-input type="password" formControlName="password" [ngClass]="{'is-valid': submitted && f.password.errors}"></ion-input>
   </ion-item>
+  <div  *ngIf="f.password.errors && submitted">
+    <ng-container>
+      <div class="error-message" *ngIf="f.password.errors.required">L e mot de passe est obligatoire *</div>
+      <div class="error-message" *ngIf="f.password.errors.pattern">Mot de passe incorrecte</div>
+    </ng-container>
+  </div>
+
   <br>
   <div style="margin-left: 15px">
-    <ion-label style="color: #07AEEF">Mot de passe oublié?</ion-label>
+    <ion-label style="color: #07AEEF">Mot de passe oublié ?</ion-label>
   </div>
   <ion-item class="btnSubmit">
     <ion-grid>
       <ion-row>
         <ion-col class="ion-align-self-center">
-          <ion-button shape="round" expand="block" color="secondary" (click)="goAdminAgence()">Se connecter</ion-button>
+          <ion-button shape="round" expand="block" color="secondary" type="submit">Se connecter</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-item>
 </div>
-
+  </form>
 </ion-content>
 </ion-app>

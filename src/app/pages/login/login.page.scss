@@ -5,14 +5,14 @@ ion-card{
   border-bottom-right-radius: 10%;
   margin: 0;
   padding: 0;
-  height: 40vh;
+  height: 35vh;
   ion-card-header
   {
     text-align: center;
   }
   .footer
   {
-    margin: 25% auto;text-align: center;
+    margin: 15% auto;text-align: center;
     border-bottom: 5px solid $myBlue;
     width: 25%;
     font-weight: bold;
@@ -25,6 +25,11 @@ ion-content{
     width: 100%;
     margin: 15% auto;
     text-align: center;
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin: 0 auto;
+    }
   }
   .btnSubmit
   {
@@ -36,6 +41,7 @@ ion-content{
     }
   }
 }
+
 
 
 

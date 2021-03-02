@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '../../_services/auth.service';
 
 @Component({
   selector: 'app-admin-agence',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminAgencePage implements OnInit {
 
-  constructor() {
-      }
+
+  permission: boolean;
+  constructor(private router: Router, private authS: AuthService) {
+    if (this.authS.decodeToken() === 'ROLE_AdminAgence')
+    {
+      this.permission = true;
+    }
+  }
 
 
   ngOnInit() {

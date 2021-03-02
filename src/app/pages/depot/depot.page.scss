@@ -1,0 +1,47 @@
+$background:#E5E5E5;
+$myBlue:#07AEEF;
+ion-app{
+  background:$background;
+  --ion-background-color:$background;
+  ion-header{
+    .mayCarde{
+      background: white;
+      border-bottom-left-radius: 10%;
+      border-bottom-right-radius: 10%;
+      margin: 0;
+      padding: 0;
+      height: 40vh;
+      ion-card-header
+      {
+        text-align: center;
+      }
+      .footer
+      {
+        margin: 20% auto;
+        text-align: center;
+        border-bottom: 5px solid $myBlue;
+        width: 50%;
+        font-weight: bold;
+      }
+    }
+  }
+  ion-content
+  {
+    ion-segment
+    {
+      width: auto;
+      height: 50px;
+      border-radius: 10%;
+      background: white;
+      margin: 5% auto;
+    }
+    .content
+    {
+      margin: 10% auto;
+    }
+  }
+}
+
+
+
+
