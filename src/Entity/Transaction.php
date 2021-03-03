@@ -56,7 +56,7 @@ class Transaction
     private $code;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
      */
