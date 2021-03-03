@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>calculateurFrais</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-card class="mayCarde">
+        <ion-card-header>
+          <ion-buttons>
+          </ion-buttons>
+          <img src="assets/images/Logo%20MONEY%20SA%201.png" alt="moneySa">
+        </ion-card-header>
+        <div class="footer">
+          <ion-item>
+            <ion-label>Calculateur de frais</ion-label>
+          </ion-item>
+        </div>
+      </ion-card>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
+  <ion-content>
 
-</ion-content>
+    <div class="mDiv">
+      <ion-item>
+        <ion-label position="stacked">Type de transaction</ion-label>
+        <ion-input value="depot" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Montant</ion-label>
+        <ion-input #fraisIput type="number" min="0" (ionChange)="getFrais(fraisIput.value)"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Frais</ion-label>
+        <ion-input readonly [value]="frais"></ion-input>
+      </ion-item>
+    </div>
+
+  </ion-content>
+</ion-app>
+

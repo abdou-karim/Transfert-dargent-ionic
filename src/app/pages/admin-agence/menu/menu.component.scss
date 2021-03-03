@@ -3,7 +3,22 @@
     color:#E56946;
   }
 }
-.ripple-parent {
-  position: relative;
-  overflow: hidden;
+ion-content
+{
+  ion-header
+  {
+    ion-card
+    {
+      ion-card-content
+      {
+        h1
+        {
+          span{
+            float: right;
+            color: #3a7be0;
+          }
+        }
+      }
+    }
+  }
 }

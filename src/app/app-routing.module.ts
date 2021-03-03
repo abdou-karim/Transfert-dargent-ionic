@@ -24,10 +24,6 @@ const routes: Routes = [
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
-  {
-    path: 'calculateur-frais',
-    loadChildren: () => import('./pages/calculateur-frais/calculateur-frais.module').then( m => m.CalculateurFraisPageModule)
-  },
 ];
 
 @NgModule({

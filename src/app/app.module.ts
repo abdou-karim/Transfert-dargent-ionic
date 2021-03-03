@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
+import {SuperTabsModule} from '@ionic-super-tabs/angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,8 @@ import {ErrorInterceptor} from './_helpers/error.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    SuperTabsModule.forRoot(),
+    SuperTabsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -15,7 +15,7 @@
         <ion-label>Transaction</ion-label>
       </ion-item>
       <ion-item *ngIf="permission">
-        <img src="assets/images/100.png" alt="" slot="start">
+        <ion-icon name="checkmark-done-outline"></ion-icon>
         <ion-label>Commisions</ion-label>
       </ion-item>
       <ion-item>
@@ -64,7 +64,7 @@
         <ion-card-subtitle>Mon solde disponible</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <h1>{{compte.solde}} FCF</h1>
+        <h1>{{compte.solde}} FCF <span><ion-icon name="eye-outline"></ion-icon></span></h1>
 
         <ion-footer><p>Mise a jour le 01/03/21 a 13:15</p></ion-footer>
       </ion-card-content>
@@ -76,7 +76,7 @@
       <div class="myliste">
         <ion-item >
           <ion-icon name="return-up-forward-outline" slot="start" ></ion-icon>
-          <div class="ion-activatable ripple-parent" (click)="depot()">
+          <div class="ion-activatable ripple-parent" routerLink="/depot">
             <ion-label>Dépôt</ion-label>
             <ion-ripple-effect type="unbounded"></ion-ripple-effect>
           </div>
@@ -98,7 +98,7 @@
           <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
         </ion-item>
         <ion-item *ngIf="permission">
-          <img src="assets/images/100.png" alt="" slot="start">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
           <ion-label>Mes commissions</ion-label>
           <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
         </ion-item>

@@ -1,8 +1,8 @@
 $background:#E5E5E5;
 $myBlue:#07AEEF;
-ion-app{
-  background:$background;
-  --ion-background-color:$background;
+:host {
+  --st-indicator-color: #E56946;
+}
   ion-header{
     .mayCarde{
       background: white;
@@ -10,38 +10,32 @@ ion-app{
       border-bottom-right-radius: 10%;
       margin: 0;
       padding: 0;
-      height: 25vh;
+      height: 35vh;
       ion-card-header
       {
         text-align: center;
+        ion-icon
+        {
+          float: left;
+          color:$myBlue;
+        }
       }
       .footer
       {
-        margin: 20% auto;
-        text-align: center;
+        margin: 0 auto;
         border-bottom: 5px solid $myBlue;
         width: 50%;
         font-weight: bold;
+        ion-item
+        {
+          text-align: center;
+      }
       }
     }
   }
-  ion-content
-  {
-    ion-segment
-    {
-      width: auto;
-      height: 50px;
-      border-radius: 1%;
-      background: white;
-      margin: 2% auto;
-    }
-    .routerOutlet
-    {
-     width: auto;
-      height:55vh;
-    }
-  }
-}
+
+
+
 
 
 

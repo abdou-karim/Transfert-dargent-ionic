@@ -9,6 +9,7 @@ import { DepotPageRoutingModule } from './depot-routing.module';
 import { DepotPage } from './depot.page';
 import {EmetteurComponent} from './emetteur/emetteur.component';
 import {BeneficiaireComponent} from './beneficiaire/beneficiaire.component';
+import {SuperTabsModule} from '@ionic-super-tabs/angular';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {BeneficiaireComponent} from './beneficiaire/beneficiaire.component';
     FormsModule,
     IonicModule,
     DepotPageRoutingModule,
+    SuperTabsModule
   ],
   declarations: [DepotPage, EmetteurComponent, BeneficiaireComponent]
 })

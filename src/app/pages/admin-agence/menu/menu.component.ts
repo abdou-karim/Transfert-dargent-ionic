@@ -34,7 +34,7 @@ export class MenuComponent implements OnInit {
       .subscribe(
         data => {
          this.compte = data;
-         console.log(this.compte);
+          console.log(data);
         }
       );
   }
