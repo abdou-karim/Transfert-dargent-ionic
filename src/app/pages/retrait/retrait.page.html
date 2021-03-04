@@ -14,14 +14,11 @@
       </div>
     </ion-card>
   </ion-toolbar>
-</ion-header>
-<ion-content>
-  <form class="code">
     <ion-item>
       <ion-label position="stacked">Code</ion-label>
-      <ion-input ></ion-input>
+      <ion-input #codeInput (focusout)="getCode(codeInput.value)"></ion-input>
     </ion-item>
-  </form>
+</ion-header>
   <super-tabs>
     <super-tabs-toolbar slot="top" color="light">
       <super-tab-button>
@@ -31,20 +28,20 @@
         <ion-label>Emetteur</ion-label>
       </super-tab-button>
     </super-tabs-toolbar>
-
     <super-tabs-container>
       <super-tab>
         <ion-content>
-          <app-emetteur></app-emetteur>
+          <app-emetteur
+            [Mtransction]="transaction"
+          ></app-emetteur>
 
         </ion-content>
       </super-tab>
       <super-tab>
         <ion-content>
-          <app-recepteur></app-recepteur>
+          <app-recepteur [Mtran]="transaction"></app-recepteur>
         </ion-content>
       </super-tab>
     </super-tabs-container>
   </super-tabs>
-</ion-content>
 

@@ -32,9 +32,11 @@ ion-header{
       }
     }
   }
-}
-.code{
-  padding-bottom: 5px;
+  ng-container
+  {
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
 }
 
 

@@ -1,22 +1,34 @@
 <ion-content>
     <ion-item>
       <ion-label position="stacked">N° NCI</ion-label>
-      <ion-input ></ion-input>
+      <ion-input #cniInput required></ion-input>
     </ion-item>
   <ion-list>
     <ion-item>
-      <ion-label>NOM & PRENOM</ion-label>
+      <ion-label>
+        NOM & PRENOM
+        <p>{{Mtransction?.client.nomBeneficiaire}}</p>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>MONTANT A RECEVOIR</ion-label>
+      <ion-label>
+        MONTANT A RECEVOIR
+        <p>{{Mtransction?.montant}}</p>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>TELEPHONE</ion-label>
+      <ion-label>
+        TELEPHONE
+        <p>{{Mtransction?.client.numeroBeneficiaire}}</p>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>DATE D'ENVOIE</ion-label>
+      <ion-label>
+        DATE D'ENVOIE
+        <p>{{Mtransction?.dateTransfert}}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
     <br>
-    <ion-button expand="block" fill="outline" type="submit">Retirer</ion-button>
+    <ion-button expand="block" fill="outline" type="submit" (click)="retrait(cniInput.value)">Retirer</ion-button>
 </ion-content>

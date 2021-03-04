@@ -32,6 +32,17 @@ const routes: Routes = [
               }
             ]
         }
+        ,
+        {
+          path: 'transaction',
+          children:
+            [
+              {
+                path: '',
+                loadChildren: () => import('../pages/transaction/transaction.module').then( m => m.TransactionPageModule)
+              }
+            ]
+        }
       ]
   }
 ];

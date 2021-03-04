@@ -26,4 +26,22 @@ export class TransService {
         )
       );
   }
+  getTransactionByCode(code:object){
+    return this.http.put(`${this.API_URL}/transaction/code`,code, this.httpOptions)
+      .pipe(
+        map(
+          data => {
+            return data;
+          }
+        )
+      );
+  }
+  retrait(cni:object){
+    return this.http.post(`${this.API_URL}/transaction/client`, cni, this.httpOptions)
+      .pipe(
+        map( data => {
+          return data;
+        })
+      );
+  }
 }

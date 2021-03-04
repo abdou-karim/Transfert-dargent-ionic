@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: 'retrait',
     loadChildren: () => import('./pages/retrait/retrait.module').then( m => m.RetraitPageModule)
-  },
+  }
 ];
 
 @NgModule({
