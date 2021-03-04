@@ -74,33 +74,28 @@
     <div>
       <!-- List of Text Items -->
       <div class="myliste">
-        <ion-item >
+        <ion-item routerLink="/depot">
           <ion-icon name="return-up-forward-outline" slot="start" ></ion-icon>
           <div class="ion-activatable ripple-parent" routerLink="/depot">
             <ion-label>Dépôt</ion-label>
             <ion-ripple-effect type="unbounded"></ion-ripple-effect>
           </div>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item>
+        </ion-item >
+        <ion-item routerLink="/retrait">
           <ion-icon name="return-up-back-outline" slot="start"></ion-icon>
           <ion-label>Retrait</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
         </ion-item>
-        <ion-item>
+        <ion-item routerLink="/">
           <ion-icon name="reload-outline" slot="start"></ion-icon>
           <ion-label>Mes transactions</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
         </ion-item>
-        <ion-item *ngIf="permission">
+        <ion-item *ngIf="permission" routerLink="/">
           <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
           <ion-label>Toutes les transactions</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
         </ion-item>
-        <ion-item *ngIf="permission">
+        <ion-item *ngIf="permission"- routerLink="/">
           <ion-icon name="checkmark-done-outline"></ion-icon>
           <ion-label>Mes commissions</ion-label>
-          <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
         </ion-item>
         <ion-item>
           <ion-icon name="chevron-back-circle-outline" slot="start"></ion-icon>

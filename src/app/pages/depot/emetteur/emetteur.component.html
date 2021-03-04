@@ -1,17 +1,18 @@
 <ion-content>
+  <form [formGroup]="emetteurForm" (ngSubmit)="emetteurSubmit()">
     <ion-item>
       <ion-label position="stacked">Nom Client</ion-label>
-      <ion-input></ion-input>
+      <ion-input formControlName="nomClient"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Numero Client</ion-label>
-      <ion-input></ion-input>
+      <ion-input formControlName="numeroClient"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Montant</ion-label>
-      <ion-input #myInput (ionChange)="getFrais(myInput.value)" type="number" [min]="0"></ion-input>
+      <ion-input #myInput (ionChange)="getFrais(myInput.value)" type="number" [min]="0" formControlName="montant"></ion-input>
     </ion-item>
 
     <ion-item class="frais">
@@ -23,5 +24,8 @@
       <ion-label position="stacked">Total</ion-label>
       <ion-input readonly [value]="Total"></ion-input>
     </ion-item>
+    <br>
+    <ion-button expand="block" fill="outline" type="submit">Suivant</ion-button>
+  </form>
   </ion-content>
 

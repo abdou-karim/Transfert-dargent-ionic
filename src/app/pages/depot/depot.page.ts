@@ -11,6 +11,7 @@ export class DepotPage implements OnInit {
   compo : any;
   Emmetteur = EmetteurComponent;
   Beneficiare = BeneficiaireComponent;
+  beneInfos: any;
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private appRef: ApplicationRef,
               private injector: Injector) { }
@@ -37,5 +38,9 @@ export class DepotPage implements OnInit {
     document.querySelector('.routerOutlet').appendChild(domElem);
 
 
+  }
+
+  getBeneInfos(event: any) {
+    this.beneInfos = event;
   }
 }

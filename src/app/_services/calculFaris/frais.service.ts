@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,9 @@ export class FraisService {
 
   frai_array = [425,850,1270,1695,2500,3000,4000,5000,6000,7000,8000,9000,12000,
     15000,22000,25000,27000,30000,30000];
+  private beneInfos = new BehaviorSubject('');
+  beneObserve = this.beneInfos.asObservable();
+
   constructor() { }
   calcalueFraisTransfert(montant:number){
     for (let i=0; i<this.max_array.length;i++){
@@ -19,5 +23,11 @@ export class FraisService {
         return montant*0.2;
       }
     }
+  }
+  get valueBen(){
+    return  this.beneInfos.value;
+  }
+  beneFVlaue(beneInfo: any){
+    this.beneInfos.next(beneInfo);
   }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,7 +17,11 @@ import {SuperTabsModule} from '@ionic-super-tabs/angular';
     FormsModule,
     IonicModule,
     DepotPageRoutingModule,
-    SuperTabsModule
+    SuperTabsModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    BeneficiaireComponent
   ],
   declarations: [DepotPage, EmetteurComponent, BeneficiaireComponent]
 })

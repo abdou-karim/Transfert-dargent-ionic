@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-card class="mayCarde">
+      <ion-card-header>
+        <ion-buttons>
+          <ion-icon name="home" size="large" routerLink="/tabs/admin-agence"></ion-icon>
+        </ion-buttons>
+        <img src="assets/images/Logo%20MONEY%20SA%201.png" alt="moneySa">
+      </ion-card-header>
+      <div class="footer">
+        <ion-item>
+          <ion-label>Retrait</ion-label>
+        </ion-item>
+      </div>
+    </ion-card>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form class="code">
+    <ion-item>
+      <ion-label position="stacked">Code</ion-label>
+      <ion-input ></ion-input>
+    </ion-item>
+  </form>
+  <super-tabs>
+    <super-tabs-toolbar slot="top" color="light">
+      <super-tab-button>
+        <ion-label>Beneficiaire</ion-label>
+      </super-tab-button>
+      <super-tab-button>
+        <ion-label>Emetteur</ion-label>
+      </super-tab-button>
+    </super-tabs-toolbar>
+
+    <super-tabs-container>
+      <super-tab>
+        <ion-content>
+          <app-emetteur></app-emetteur>
+
+        </ion-content>
+      </super-tab>
+      <super-tab>
+        <ion-content>
+          <app-recepteur></app-recepteur>
+        </ion-content>
+      </super-tab>
+    </super-tabs-container>
+  </super-tabs>
+</ion-content>
+
