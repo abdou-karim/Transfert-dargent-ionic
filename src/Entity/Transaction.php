@@ -14,6 +14,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     attributes={},
  *     collectionOperations={
  *          "GET",
+ *          "get_transaction_by_code"={
+ *              "method"="GET",
+ *               "path"="/code",
+ *          "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_UtilisateurAgence')",
+ *          "security_message"="Acces non autorisé",
+ *     },
  *           "Recharge_compte"={
  *              "method"="POST",
  *              "path"="/compte",
@@ -26,14 +32,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "method"="POST",
  *              "path"="/client",
  *              "security_message"="Acces non autorisé",
- *              "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_Caissier')",
+ *              "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_UtilisateurAgence')",
  *               "normalization_context"={"groups"={"trans_client:read"}},
  *              "denormalization_context"={"groups"={"trans_client:write"}},
  *     }
  *     },
  *     itemOperations={
  *          "GET"={"defaults"={"id"=null},},
- *          "PUT",
+ *          "get_trans_by_code"={
+ *                 "method"="PUT",
+ *               "path"="/code",
+ *          "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_UtilisateurAgence')",
+ *          "security_message"="Acces non autorisé",
+ *     },
  *          "DELETE"
  *     },
  *     )
@@ -46,12 +57,14 @@ class Transaction
      * @ORM\Column(type="integer")
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $code;
 
@@ -59,6 +72,7 @@ class Transaction
      * @ORM\Column(type="integer")
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $montant;
 
@@ -66,6 +80,7 @@ class Transaction
      * @ORM\Column(type="date")
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $dateTransfert;
 
@@ -84,12 +99,14 @@ class Transaction
     /**
      * @ORM\Column(type="integer",nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $partEtat;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $partEntreprise;
 
@@ -101,6 +118,7 @@ class Transaction
     /**
      * @ORM\Column(type="integer",nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $partAgenceDepot;
 
@@ -111,6 +129,7 @@ class Transaction
 
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="transaction",cascade={"persist", "remove"})
+     * @Groups({"getTrans"})
      * @Groups({"trans_client:read", "trans_client:write"})
      */
     private $client;

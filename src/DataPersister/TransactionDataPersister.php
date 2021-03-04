@@ -90,8 +90,11 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
             }
 
         }
+
           $this->entityManager->flush();
       }
+
+
     }
 
     public function remove($data, array $context = [])

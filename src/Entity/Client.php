@@ -23,30 +23,35 @@ class Client
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $nomClient;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $numeroClient;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $nomBeneficiaire;
 
     /**
      * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"getTrans"})
      */
     private $numeroBeneficiaire;
 
