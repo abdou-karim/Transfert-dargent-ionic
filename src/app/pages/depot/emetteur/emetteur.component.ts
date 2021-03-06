@@ -15,12 +15,14 @@ export class EmetteurComponent implements OnInit {
   emetteurForm: FormGroup;
   ngOnInit() {
     this.emetteurForm = this.fb.group({
-      nomClient: ['', Validators.required],
-      numeroClient: ['', Validators.required],
+      nomClient: ['', [Validators.required,Validators.pattern('^[A-Z][a-zA-Z? ]{5,20}$')]],
+      numeroClient: ['', [Validators.required, Validators.pattern('^7[78065]([0-9]{3})([0-9]{2}){2}$')]],
       montant: ['', Validators.required]
     });
   }
-
+  get e (){
+    return this.emetteurForm.controls
+  }
   getFrais( montant: number){
     montant = Number(montant)
     if(montant <500){

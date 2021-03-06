@@ -20,7 +20,6 @@ export class TransService {
       .pipe(
         map(
           data => {
-            console.log(data);
             return data;
           }
         )

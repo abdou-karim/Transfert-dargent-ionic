@@ -43,6 +43,17 @@ const routes: Routes = [
               }
             ]
         }
+        ,
+        {
+          path: 'mes-commissions',
+          children:
+            [
+              {
+                path: '',
+                loadChildren: () => import('../pages/mes-commissions/mes-commissions.module').then( m => m.MesCommissionsPageModule)
+              }
+            ]
+        }
       ]
   }
 ];

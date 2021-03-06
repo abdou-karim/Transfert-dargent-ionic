@@ -3,14 +3,23 @@
       <form [formGroup]="beneficiaireForm" (ngSubmit)="beneSubmit()">
 
       <ion-item>
-        <ion-label position="stacked">Nom Beneficiaire</ion-label>
-        <ion-input formControlName="nomBeneficiaire"></ion-input>
+        <ion-label position="floating">Nom Beneficiaire</ion-label>
+        <ion-input formControlName="nomBeneficiaire" [ngClass]="{'is-valid': is_submit && b.nomBeneficiaire.errors}"></ion-input>
       </ion-item>
-
+        <div  *ngIf="b.nomBeneficiaire.errors && is_submit">
+          <ng-container>
+            <div class="error-message" *ngIf="b.nomBeneficiaire.errors.pattern">Entrer invalide</div>
+          </ng-container>
+        </div>
       <ion-item>
-        <ion-label position="stacked">Numero Beneficiaire</ion-label>
-        <ion-input formControlName="numeroBeneficiaire"></ion-input>
+        <ion-label position="floating">Numero Beneficiaire</ion-label>
+        <ion-input formControlName="numeroBeneficiaire" [ngClass]="{'is-valid': is_submit && b.numeroBeneficiaire.errors}"></ion-input>
       </ion-item>
+        <div  *ngIf="b.numeroBeneficiaire.errors && is_submit">
+          <ng-container>
+            <div class="error-message" *ngIf="b.numeroBeneficiaire.errors.pattern">Numero invalide</div>
+          </ng-container>
+        </div>
       <br>
       <ion-button expand="block" fill="outline" type="submit">Suivant</ion-button>
       </form>

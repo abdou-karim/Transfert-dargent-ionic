@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../_services/auth.service';
+import {AlertController} from '@ionic/angular';
 
 
 
@@ -13,7 +14,7 @@ import {AuthService} from '../../_services/auth.service';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
   submitted = false;
-  constructor(private router: Router, private fb: FormBuilder, private authS: AuthService) { }
+  constructor(private router: Router, private fb: FormBuilder, private authS: AuthService, private alertControll: AlertController) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -25,7 +26,7 @@ export class LoginPage implements OnInit {
   {
     return this.loginForm.controls;
   }
-  authUser()
+   authUser()
   {
     this.submitted = true;
     if (this.loginForm.invalid)
@@ -33,8 +34,19 @@ export class LoginPage implements OnInit {
      return;
     }
     this.authS.login(this.f.username.value, this.f.password.value)
-      .subscribe((data) => {
-        });
+      .subscribe(() => {
+        },
+        async () => {
+          const alert = await this.alertControll.create({
+            cssClass: 'basic-alert',
+            header: 'Login ou Password *',
+            message: '' +
+              '<p>Vous n\'etes pas autorisé a vous connecter !</p><ion-spinner name="lines"></ion-spinner>',
+          });
+
+          await alert.present();
+        }
+      );
   }
 
 }

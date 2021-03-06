@@ -19,7 +19,7 @@
 <div class="mycontent">
   <ion-item [mode]="'ios' || 'md'">
     <ion-label position="floating">Telephonne</ion-label>
-    <ion-input formControlName="username" [ngClass]="{'is-valid': submitted && f.username.errors}" required=""></ion-input>
+    <ion-input formControlName="username" [ngClass]="{'is-valid': submitted && f.username.errors}" ></ion-input>
   </ion-item>
   <div  *ngIf="f.username.errors && submitted">
     <ng-container>

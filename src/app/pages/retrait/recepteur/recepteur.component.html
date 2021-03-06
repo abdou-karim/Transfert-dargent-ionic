@@ -1,27 +1,27 @@
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="Mtran">
     <ion-item>
       <ion-label>
         NOM & PRENOM
-        <p>{{Mtran?.client.nomClient}}</p>
+        <p>{{Mtran.client.nomClient}}</p>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
         MONTANT A RECEVOIR
-        <p>{{Mtran?.montant}}</p>
+        <p>{{Mtran.montant}}</p>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
         TELEPHONE
-        <p>{{Mtran?.client.numeroClient}}</p>
+        <p>{{Mtran.client.numeroClient}}</p>
       </ion-label>
     </ion-item>
     <ion-item>
       <ion-label>
         DATE D'ENVOIE
-        <p>{{Mtran?.dateTransfert}}</p>
+        <p>{{Mtran.dateTransfert |  date:'medium'}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

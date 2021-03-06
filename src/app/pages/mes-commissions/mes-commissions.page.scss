@@ -10,7 +10,7 @@ ion-header{
     border-bottom-right-radius: 10%;
     margin: 0;
     padding: 0;
-    height: auto;
+    height: 35vh;
     ion-card-header
     {
       text-align: center;
@@ -29,17 +29,8 @@ ion-header{
       ion-item
       {
         text-align: center;
-      }
-      .code{
-        margin: 10%;
+        border-bottom: none;
       }
     }
   }
 }
-
-
-
-
-
-
-

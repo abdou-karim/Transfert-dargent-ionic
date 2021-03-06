@@ -1,27 +1,35 @@
 <ion-content>
   <form [formGroup]="emetteurForm" (ngSubmit)="emetteurSubmit()">
     <ion-item>
-      <ion-label position="stacked">Nom Client</ion-label>
-      <ion-input formControlName="nomClient"></ion-input>
+      <ion-label position="floating">Nom Client</ion-label>
+      <ion-input formControlName="nomClient" [ngClass]="{'is-valid': submited && e.nomClient.errors}"></ion-input>
     </ion-item>
-
+    <div  *ngIf="e.nomClient.errors && submited">
+      <ng-container>
+        <div class="error-message" *ngIf="e.nomClient.errors.pattern">Entrer invalide</div>
+      </ng-container>
+    </div>
     <ion-item>
-      <ion-label position="stacked">Numero Client</ion-label>
-      <ion-input formControlName="numeroClient"></ion-input>
+      <ion-label position="floating">Numero Client</ion-label>
+      <ion-input formControlName="numeroClient" [ngClass]="{'is-valid': submited && e.numeroClient.errors}"></ion-input>
     </ion-item>
-
+    <div  *ngIf="e.numeroClient.errors && submited">
+      <ng-container>
+        <div class="error-message" *ngIf="e.numeroClient.errors.pattern">Numero invalide</div>
+      </ng-container>
+    </div>
     <ion-item>
-      <ion-label position="stacked">Montant</ion-label>
+      <ion-label position="floating">Montant</ion-label>
       <ion-input #myInput (ionChange)="getFrais(myInput.value)" type="number" [min]="0" formControlName="montant"></ion-input>
     </ion-item>
 
     <ion-item class="frais">
-      <ion-label position="stacked">Frais</ion-label>
+      <ion-label position="floating">Frais</ion-label>
       <ion-input readonly [value]="frais"></ion-input>
     </ion-item>
     <br>
     <ion-item>
-      <ion-label position="stacked">Total</ion-label>
+      <ion-label position="floating">Total</ion-label>
       <ion-input readonly [value]="Total"></ion-input>
     </ion-item>
     <br>

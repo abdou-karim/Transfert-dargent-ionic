@@ -1,8 +1,8 @@
 export interface Transaction{
   id: number;
   code: string;
-  dateTransfert?:Date;
   montant?: number;
+  dateTransfert?:Date;
   client?: {
     id: number;
     nomBeneficiaire: string;
@@ -13,6 +13,4 @@ export interface Transaction{
   partAgenceDepot: number;
   partEntreprise: number;
   partEtat: number;
-
-
 }

@@ -13,12 +13,13 @@
         </ion-item>
       </div>
     </ion-card>
-  </ion-toolbar>
-    <ion-item>
-      <ion-label position="stacked">Code</ion-label>
+    <ion-item [color]="'#7d7d7d'" class="code">
+      <ion-label position="floating">Code</ion-label>
       <ion-input #codeInput (focusout)="getCode(codeInput.value)"></ion-input>
     </ion-item>
+  </ion-toolbar>
 </ion-header>
+
   <super-tabs>
     <super-tabs-toolbar slot="top" color="light">
       <super-tab-button>
@@ -44,4 +45,3 @@
       </super-tab>
     </super-tabs-container>
   </super-tabs>
-

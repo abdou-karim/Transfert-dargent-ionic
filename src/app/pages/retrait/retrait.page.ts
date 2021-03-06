@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TransService} from '../../_services/transactions/trans.service';
 import {Transaction} from '../../_modeles/transaction';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-retrait',
@@ -9,21 +10,33 @@ import {Transaction} from '../../_modeles/transaction';
 })
 export class RetraitPage implements OnInit {
   transaction: Transaction;
-  constructor(private transS: TransService) { }
+  constructor(private transS: TransService, private alertController: AlertController) { }
 
   ngOnInit() {
   }
   getCode(code:string){
-    return this.transS.getTransactionByCode({code: code})
+    if(code === ""){
+      return ;
+    }
+    this.transS.getTransactionByCode({code: code})
       .subscribe(
         (data) => {
           // @ts-ignore
           this.transaction = data;
           console.log(data);
         },
-      () => {
-          alert('cette transcation n\'existe pas');
-      }
+        async () => {
+          // @ts-ignore
+          this.transaction = "";
+          const erreurCode = await this.alertController.create({
+            header: 'Erreur Code',
+            subHeader: 'INFOS',
+            cssClass: 'basic-alert',
+            mode:'ios',
+            message: 'Ce code n\'existe pas .! </p><ion-icon name="alert-circle-outline" [color]="#e04055"></ion-icon>'
+          });
+          await erreurCode.present();
+        }
       )
   }
 }

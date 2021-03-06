@@ -24,3 +24,53 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+.basic-alert {
+  text-align: center;
+  justify-content: center;
+  .shar{
+    background-image: url('assets/images/share.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center !important;
+  }
+  .sms{
+    color: white;
+    background-image: url('assets/images/SMS.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center !important;
+  }
+  .confirm{
+    color: white;
+    background-image: url('assets/images/Rectangle 66.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-align: center !important;
+  }
+}
+.basic-alert .alert-wrapper {
+
+  .alert-title {
+    background: #EDEDED;
+    text-align: center;
+  }
+  .alert-sub-title {
+    text-align: center;
+  }
+
+  .alert-message {
+    text-align: center;
+  }
+
+  .alert-button-inner {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center !important;
+    margin: 3px;
+  }
+
+}
+
