@@ -13,13 +13,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     routePrefix="transaction",
  *     attributes={},
  *     collectionOperations={
- *          "GET",
- *          "get_transaction_by_code"={
+ *          "get_commision_utilisateurAgence"={
  *              "method"="GET",
- *               "path"="/code",
- *          "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_UtilisateurAgence')",
+ *              "path"="/commisons_user",
+ *              "security"= "is_granted('ROLE_UtilisateurAgence')",
+ *              "security_message"="Acces non autorisé",
+ *     },
+ *          "get_transaction_commision_agencePartenaire"={
+ *              "method"="GET",
+ *               "path"="/mes_commision",
+ *          "security"= "is_granted('ROLE_AdminAgence')",
  *          "security_message"="Acces non autorisé",
  *     },
+ *
  *           "Recharge_compte"={
  *              "method"="POST",
  *              "path"="/compte",
@@ -172,6 +178,7 @@ class Transaction
     public function getDateTransfert(): ?\DateTimeInterface
     {
         return $this->dateTransfert;
+      //  return \DateTime::createFromFormat('Y-m-d',$this->dateTransfert);
     }
 
     public function setDateTransfert(\DateTimeInterface $dateTransfert): self
@@ -184,6 +191,7 @@ class Transaction
     public function getDateRetrait(): ?\DateTimeInterface
     {
         return $this->dateRetrait;
+        //return \DateTime::createFromFormat('Y-m-d',$this->dateRetrait);
     }
 
     public function setDateDexpiration(\DateTimeInterface $dateRetrait): self

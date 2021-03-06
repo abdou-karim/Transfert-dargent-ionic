@@ -45,23 +45,29 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
       }
       if($context['collection_operation_name'] ==="Transfert_client"){
           $frait = $this->frais->getFrais($data->getMontant());
-          $parEtat = $frait*0.04;
-          $partEntrePrise = $frait*0.03;
-          $partAgenceDepot = $frait*0.01;
-          $partAgenceRetrait = $frait*0.02;
+          $parEtat = $frait*0.4;
+          $partEntrePrise = $frait*0.3;
+          $partAgenceDepot = $frait*0.1;
+          $partAgenceRetrait = $frait*0.2;
           if($data->getType() === "depot")
           {
               $agentP=$this->security->getUser()->getAgencePartenaire();
 
               $comp = $this->compteRepository->getCompte($agentP->getId());
-              $comp->setSolde(($comp->getSolde()-$data->getMontant()) + $partAgenceDepot);
-              $data->setPartEtat($parEtat);
-              $data->setCode($this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire()));
-              $data->setPartEntreprise($partEntrePrise);
-              $data->setPartAgenceDepot($partAgenceDepot);
-              $data->setDateTransfert(new \DateTime('now'));
-              $data->setUser($this->security->getUser());
-              $this->entityManager->persist($data);
+              if($comp->getSolde() >$data->getMontant() ){
+                  $comp->setSolde(($comp->getSolde()-$data->getMontant()) + $partAgenceDepot);
+                  $data->setPartEtat($parEtat);
+                  $data->setCode($this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire()));
+                  $data->setPartEntreprise($partEntrePrise);
+                  $data->setPartAgenceDepot($partAgenceDepot);
+                  $data->setDateTransfert(new \DateTime('now'));
+                  $data->setUser($this->security->getUser());
+                  $this->entityManager->persist($data);
+              }else
+              {
+                  throw new \RuntimeException("Veuillez Recharger votre compte");
+              }
+
           }
         if($data->getType()==="retrait"){
             $code = $data->getCode();

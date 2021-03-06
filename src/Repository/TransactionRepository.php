@@ -47,4 +47,26 @@ class TransactionRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getCommissionAgencePartenaire($idAgence){
+        $query = $this->createQueryBuilder('t')
+            ->select('t')
+            ->join('t.user','u')
+            ->join('u.agencePartenaire','a')
+            ->where('a.id=:idagence')
+            ->setParameter('idagence',$idAgence)
+            ->getQuery()
+            ->getResult();
+        return $query;
+    }
+    public function getCommissionUserAgence($idUser)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('p')
+            ->join('p.user','u')
+            ->where('u.id=:idUser')
+            ->setParameter('idUser',$idUser)
+            ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }
