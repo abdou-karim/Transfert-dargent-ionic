@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-card class="mayCarde">
+      <ion-card-header>
+        <ion-buttons role="button">
+          <ion-icon name="home" size="large" routerLink="/tabs/admin-agence"></ion-icon>
+        </ion-buttons>
+        <img src="assets/images/Logo%20MONEY%20SA%201.png" alt="moneySa">
+      </ion-card-header>
+      <div class="footer">
+        <ion-item>
+          <ion-label>Bloquer Transaction</ion-label>
+        </ion-item>
+      </div>
+    </ion-card>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="bloquerTransaction" (ngSubmit)="bloquerTrans()">
+
+  <ion-item>
+    <ion-label position="floating">Code Transaction</ion-label>
+    <ion-input #codeInput formControlName="code" (focusout)="getCode(codeInput.value)"></ion-input>
+  </ion-item>
+
+    <ion-list *ngIf="etatRequest">
+
+      <ion-item>
+        <ion-label>Nom Client<p>{{transaction.client?.nomClient}}</p></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Numero Client<p>{{transaction.client?.numeroClient}}</p></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Nom Beneficiaire<p>{{transaction.client?.nomBeneficiaire}}</p></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Numero Beneficiaire<p>{{transaction.client?.numeroBeneficiaire}}</p></ion-label>
+      </ion-item>
+      <br>
+      <ion-button expand="block" fill="outline" type="submit" [disabled]="etatRequest!==true">Bloquer</ion-button>
+    </ion-list>
+  </form>
+</ion-content>

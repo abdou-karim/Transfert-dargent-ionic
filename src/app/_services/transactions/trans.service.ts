@@ -59,4 +59,14 @@ export class TransService {
         })
       );
   }
+  bloquerTransaction(code:object){
+    return this.http.put(`${this.API_URL}/transaction/bloquer`,code,this.httpOptions)
+      .pipe(
+        map(
+          data => {
+            return data;
+          }
+        )
+      );
+  }
 }

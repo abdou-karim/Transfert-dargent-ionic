@@ -6,21 +6,25 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-item button>
+      <ion-item button routerLink="/tabs/admin-agence">
         <ion-icon name="home" slot="start" ></ion-icon>
         <ion-label>Home</ion-label>
       </ion-item>
-      <ion-item button>
-        <ion-icon name="time-outline" slot="start"></ion-icon>
+      <ion-item button [routerLink]="routeActive">
+        <ion-icon name="time-outline" slot="start" ></ion-icon>
         <ion-label>Transaction</ion-label>
       </ion-item >
-      <ion-item *ngIf="permission" button>
+      <ion-item *ngIf="permission" button routerLink="/tabs/mes-commissions">
         <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
         <ion-label>Commisions</ion-label>
       </ion-item>
-      <ion-item button>
-        <img src="assets/images/calculateur%20de%20frais.png" alt="" slot="start">
+      <ion-item button routerLink="/tabs/calcule-frais">
+        <ion-icon name="calculator-outline" slot="start"></ion-icon>
         <ion-label>Calculateur</ion-label>
+      </ion-item>
+      <ion-item button routerLink="/bloquer-transaction">
+        <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+        <ion-label>Bloquer Transaction</ion-label>
       </ion-item>
       <ion-item button>
         <ion-icon name="power-outline" slot="start"></ion-icon>
@@ -64,9 +68,12 @@
         <ion-card-subtitle>Mon solde disponible</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content>
-        <h1>{{compte?.solde}} FCF <span><ion-icon name="eye-outline"></ion-icon></span></h1>
+        <ion-item>
+          <ion-label *ngIf="hideShowSomme"> <h1 >{{compte?.solde}} FCF</h1></ion-label>
+          <span><ion-icon [name]="nameIcone" slot="end" (click)="hideShowSomme=!hideShowSomme" (click)="getClick()"></ion-icon></span>
+        </ion-item>
 
-        <ion-footer><p>Mise a jour le 01/03/21 a 13:15</p></ion-footer>
+        <ion-footer><p>Mise a jour {{today | date}}</p></ion-footer>
       </ion-card-content>
     </ion-card>
   </ion-header>
