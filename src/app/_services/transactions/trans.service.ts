@@ -43,4 +43,12 @@ export class TransService {
         })
       );
   }
+  getToutMesCommissions(){
+    return this.http.get(`${this.API_URL}/transaction/mes_commision`)
+      .pipe(
+        map( data => {
+          return data;
+        })
+      );
+  }
 }

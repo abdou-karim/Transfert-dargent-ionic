@@ -3,6 +3,7 @@ export interface Transaction{
   code: string;
   montant?: number;
   dateTransfert?:Date;
+  type: string;
   client?: {
     id: number;
     nomBeneficiaire: string;
@@ -13,4 +14,12 @@ export interface Transaction{
   partAgenceDepot: number;
   partEntreprise: number;
   partEtat: number;
+  partAgenceRetrait: number;
+  user:{
+    username: string;
+    email: string;
+    prenom: string;
+    telephone: string;
+    nom: string;
+  }
 }

@@ -35,3 +35,33 @@ ion-header{
     }
   }
 }
+ion-content
+{
+  background: $background;
+  --ion-background-color: $background;
+  ion-grid
+  {
+    ion-row
+    {
+      ion-col
+      {
+        div
+        {
+          background: white;
+          color: #0d0d0d;
+
+          ion-label
+          {
+            text-align: center;
+            padding-right: 5px;
+            font-size: 12px;
+          }
+        }
+        ion-item
+        {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

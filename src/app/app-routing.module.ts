@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'retrait',
     loadChildren: () => import('./pages/retrait/retrait.module').then( m => m.RetraitPageModule)
+  },
+  {
+    path: 'mes-transactions',
+    loadChildren: () => import('./pages/mes-transactions/mes-transactions.module').then( m => m.MesTransactionsPageModule)
   }
 ];
 
