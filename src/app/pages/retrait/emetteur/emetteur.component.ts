@@ -3,6 +3,7 @@ import {Transaction} from '../../../_modeles/transaction';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TransService} from '../../../_services/transactions/trans.service';
 import {AlertController} from '@ionic/angular';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-emetteur',
@@ -17,7 +18,8 @@ export class EmetteurComponent implements OnInit {
   trans: Transaction;
   boo = false;
   mcni: string;
-  constructor(private fb: FormBuilder, private transS: TransService, private alertController: AlertController) { }
+  constructor(private fb: FormBuilder, private transS: TransService,
+              private alertController: AlertController,private router: Router) { }
 
   ngOnInit() {
     this.cniForm = this.fb.group({
@@ -82,11 +84,17 @@ export class EmetteurComponent implements OnInit {
               cssClass:'confirm',
               handler: () => {
                 this.transS.retrait(retrait).subscribe(
-                  data => {
-                    console.log(data);
-                  },
                   () => {
-                    alert('error')
+                    this.router.navigateByUrl('tabs/admin-agence')
+                  },
+                  async () => {
+                    const alert = await this.alertController.create({
+                      cssClass: 'basic-alert',
+                      header: 'Erreur retrait*',
+                      message: '<p>Cet retrait est deja effectué !</p><ion-spinner name="lines"></ion-spinner>',
+                    });
+
+                    await alert.present();
                   }
                 )
               }
