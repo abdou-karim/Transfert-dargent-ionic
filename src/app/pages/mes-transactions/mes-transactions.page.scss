@@ -4,6 +4,7 @@ $myBlue:#07AEEF;
   --st-indicator-color: #E56946;
 }
 ion-header{
+  font-family: Cormorant Garamond, serif;
   .mayCarde{
     background: white;
     border-bottom-left-radius: 10%;
@@ -37,6 +38,7 @@ ion-header{
 }
 ion-content
 {
+  font-family: Cormorant Garamond, serif;
   background: $background;
   --ion-background-color: $background;
   ion-grid
@@ -63,6 +65,10 @@ ion-content
         ion-item
         {
           font-size: 12px;
+          ion-button
+          {
+            --background: #FA4A0C;
+          }
         }
       }
     }

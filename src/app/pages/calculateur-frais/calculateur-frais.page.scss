@@ -5,6 +5,7 @@ ion-app {
   --ion-background-color: $background;
 
   ion-header {
+    font-family: Cormorant Garamond, serif;
     .mayCarde {
       background: white;
       border-bottom-left-radius: 10%;
@@ -31,6 +32,7 @@ ion-app {
   }
   ion-content
   {
+    font-family: Cormorant Garamond, serif;
     .mDiv{
       margin: 20% auto;
     }

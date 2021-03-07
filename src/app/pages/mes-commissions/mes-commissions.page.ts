@@ -9,6 +9,8 @@ import {Transaction} from '../../_modeles/transaction';
 })
 export class MesCommissionsPage implements OnInit {
 transaction: Transaction[] = [];
+  tabMontantTotal: number[] = [];
+  MontantTotal: number;
   constructor(private trans: TransService) { }
 
   ngOnInit() {
@@ -20,8 +22,14 @@ transaction: Transaction[] = [];
       .subscribe(
         (data) => {
           this.transaction =data['hydra:member']
-          console.log(this.transaction);
+          for (const oneTrnas of this.transaction) {
+            this.tabMontantTotal.push(Number(oneTrnas.montant));
+            this.MontantTotal = this.tabMontantTotal.reduce(this.addValue);
+          }
         }
       )
+  }
+  addValue(a,b){
+    return a + b;
   }
 }

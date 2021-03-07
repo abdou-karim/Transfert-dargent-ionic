@@ -1,6 +1,7 @@
 $background:#E5E5E5;
 $myBlue:#07AEEF;
 ion-card{
+  font-family: Cormorant Garamond, serif;
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
   margin: 0;
@@ -19,6 +20,7 @@ ion-card{
   }
 }
 ion-content {
+  font-family: Cormorant Garamond, serif;
   background-color: $background;
 
   .mycontent {

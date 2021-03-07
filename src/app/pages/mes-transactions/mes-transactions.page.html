@@ -79,5 +79,15 @@
           {{'$'+Mtrans.montant}}
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="2"></ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="fixed"><ion-button>Total</ion-button></ion-label>
+          <ion-input readonly [value]="MontantTotal"></ion-input>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
