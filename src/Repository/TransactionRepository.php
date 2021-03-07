@@ -69,4 +69,18 @@ class TransactionRepository extends ServiceEntityRepository
             ->getResult();
         return $query;
     }
+    public function getTransactionByPhoneNumber($numeroClient,$numeroBeneficiaire,$dateTransfert){
+        $query = $this->createQueryBuilder('t')
+            ->select('t')
+            ->join('t.client','u')
+            ->where('u.numeroClient=:numC')
+            ->andWhere('u.numeroBeneficiaire=:numB')
+            ->andWhere('t.dateTransfert=:dateT')
+            ->setParameter('numC',$numeroClient)
+            ->setParameter('numB',$numeroBeneficiaire)
+            ->setParameter('dateT',$dateTransfert)
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $query;
+    }
 }

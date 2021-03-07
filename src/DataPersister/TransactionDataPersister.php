@@ -72,6 +72,10 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
         if($data->getType()==="retrait"){
             $code = $data->getCode();
             $agentP=$this->security->getUser()->getAgencePartenaire();
+            $arrayTrans = $this->transactionRepository->findBy(['code'=>$code]);
+            if(count($arrayTrans)> 1){
+                throw new \RuntimeException("Cet retrait est deja effectué");
+            }
             $transaction = $this->transactionRepository->findOneBy(['code'=>$code]);
             $client =  $transaction->getClient();
             $client->setCniBeneficiaire($data->getClient()->getCniBeneficiaire());

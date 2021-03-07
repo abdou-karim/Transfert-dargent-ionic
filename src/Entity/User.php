@@ -87,6 +87,7 @@ class User implements UserInterface
      * @Groups("user:read")
      * @Groups("compte:read")
      * @Groups({"profile:read"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $id;
 
@@ -95,6 +96,7 @@ class User implements UserInterface
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
      * @Groups({"profile:read"})
+     *  @Groups({"trans_TTmcommission:read"})
      * @Assert\NotBlank
      */
     private $username;
@@ -118,6 +120,7 @@ class User implements UserInterface
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
      * @Groups({"profile:read"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $email;
 
@@ -126,6 +129,7 @@ class User implements UserInterface
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
      * @Groups({"profile:read"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $telephone;
 
@@ -134,6 +138,7 @@ class User implements UserInterface
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
      * @Groups({"profile:read"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $prenom;
 
@@ -142,6 +147,7 @@ class User implements UserInterface
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
      * @Groups({"profile:read"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $nom;
 
@@ -157,6 +163,7 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"user:read", "user:write"})
      * @Groups("compte:read")
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $profile;
 
@@ -180,10 +187,16 @@ class User implements UserInterface
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity=TransactionBloquer::class, mappedBy="user")
+     */
+    private $transactionBloquers;
+
     public function __construct()
     {
         $this->comptes = new ArrayCollection();
         $this->transactions = new ArrayCollection();
+        $this->transactionBloquers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -430,6 +443,36 @@ class User implements UserInterface
     public function setAvatar($avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TransactionBloquer[]
+     */
+    public function getTransactionBloquers(): Collection
+    {
+        return $this->transactionBloquers;
+    }
+
+    public function addTransactionBloquer(TransactionBloquer $transactionBloquer): self
+    {
+        if (!$this->transactionBloquers->contains($transactionBloquer)) {
+            $this->transactionBloquers[] = $transactionBloquer;
+            $transactionBloquer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransactionBloquer(TransactionBloquer $transactionBloquer): self
+    {
+        if ($this->transactionBloquers->removeElement($transactionBloquer)) {
+            // set the owning side to null (unless already changed)
+            if ($transactionBloquer->getUser() === $this) {
+                $transactionBloquer->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -66,9 +66,15 @@ class Client
      */
     private $transaction;
 
+    /**
+     * @ORM\OneToMany(targetEntity=TransactionBloquer::class, mappedBy="client")
+     */
+    private $transactionBloquers;
+
     public function __construct()
     {
         $this->transaction = new ArrayCollection();
+        $this->transactionBloquers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +166,36 @@ class Client
             // set the owning side to null (unless already changed)
             if ($transaction->getClient() === $this) {
                 $transaction->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|TransactionBloquer[]
+     */
+    public function getTransactionBloquers(): Collection
+    {
+        return $this->transactionBloquers;
+    }
+
+    public function addTransactionBloquer(TransactionBloquer $transactionBloquer): self
+    {
+        if (!$this->transactionBloquers->contains($transactionBloquer)) {
+            $this->transactionBloquers[] = $transactionBloquer;
+            $transactionBloquer->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransactionBloquer(TransactionBloquer $transactionBloquer): self
+    {
+        if ($this->transactionBloquers->removeElement($transactionBloquer)) {
+            // set the owning side to null (unless already changed)
+            if ($transactionBloquer->getClient() === $this) {
+                $transactionBloquer->setClient(null);
             }
         }
 

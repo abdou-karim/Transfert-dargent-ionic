@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get_commision_utilisateurAgence"={
  *              "method"="GET",
  *              "path"="/commisons_user",
- *              "security"= "is_granted('ROLE_UtilisateurAgence')",
+ *              "security"= "is_granted('ROLE_UtilisateurAgence') or is_granted('ROLE_AdminAgence')",
  *              "security_message"="Acces non autorisé",
  *     },
  *          "get_transaction_commision_agencePartenaire"={
@@ -24,6 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *               "path"="/mes_commision",
  *          "security"= "is_granted('ROLE_AdminAgence')",
  *          "security_message"="Acces non autorisé",
+ *     "normalization_context"={"groups"={"trans_TTmcommission:read"}},
  *     },
  *
  *           "Recharge_compte"={
@@ -51,6 +52,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_UtilisateurAgence')",
  *          "security_message"="Acces non autorisé",
  *     },
+ *     "bloquer_transaction"={
+ *          "method"="PUT",
+ *          "path"="/bloquer",
+ *          "security"= "is_granted('ROLE_AdminAgence') or is_granted('ROLE_UtilisateurAgence')",
+ *          "security_message"="Acces non autorisé",
+ *
+ *     },
  *          "DELETE"
  *     },
  *     )
@@ -63,6 +71,7 @@ class Transaction
      * @ORM\Column(type="integer")
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
+     * @Groups({"trans_TTmcommission:read"})
      * @Groups({"getTrans"})
      */
     private $id;
@@ -71,6 +80,7 @@ class Transaction
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      * @Groups({"getTrans"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $code;
 
@@ -79,6 +89,7 @@ class Transaction
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
      * @Groups({"getTrans"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $montant;
 
@@ -87,11 +98,13 @@ class Transaction
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
      * @Groups({"getTrans"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $dateTransfert;
 
     /**
      * @ORM\Column(type="date",nullable=true)
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $dateRetrait;
 
@@ -99,6 +112,7 @@ class Transaction
      * @ORM\Column(type="string", length=255)
      * @Groups({"trans_compte:read", "trans_compte:write"})
      * @Groups({"trans_client:read", "trans_client:write"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $type;
 
@@ -106,6 +120,7 @@ class Transaction
      * @ORM\Column(type="integer",nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      * @Groups({"getTrans"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $partEtat;
 
@@ -113,11 +128,13 @@ class Transaction
      * @ORM\Column(type="integer",nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      * @Groups({"getTrans"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $partEntreprise;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $partAgenceRetrait;
 
@@ -125,11 +142,13 @@ class Transaction
      * @ORM\Column(type="integer",nullable=true)
      * @Groups({"trans_client:read", "trans_client:write"})
      * @Groups({"getTrans"})
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $partAgenceDepot;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="transactions")
+     *  @Groups({"trans_TTmcommission:read"})
      */
     private $user;
 
