@@ -1,9 +1,83 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>mesTransactions</ion-title>
+    <ion-card class="mayCarde">
+      <ion-card-header>
+        <ion-buttons role="button">
+          <ion-icon name="home" size="large" routerLink="/tabs/admin-agence"></ion-icon>
+        </ion-buttons>
+        <img src="assets/images/Logo%20MONEY%20SA%201.png" alt="moneySa">
+      </ion-card-header>
+      <div class="footer">
+        <ion-item>
+          <ion-label>Mes transactions</ion-label>
+        </ion-item>
+      </div>
+    </ion-card>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <ion-grid>
+    <ion-row>
 
+     <ion-col>
+       <div>
+         <ion-label>Type</ion-label>
+         <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+       </div>
+     </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Du</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Au</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col>
+        <div>
+          <ion-label>Date</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Type</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Montant</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let Mtrans of transaction">
+
+      <ion-col>
+        {{Mtrans.dateTransfert | date}}
+      </ion-col>
+
+      <ion-col>
+          {{Mtrans.type}}
+      </ion-col>
+
+      <ion-col>
+          {{'$'+Mtrans.montant}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

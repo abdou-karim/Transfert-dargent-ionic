@@ -16,3 +16,81 @@
     </ion-card>
   </ion-toolbar>
 </ion-header>
+<ion-content>
+  <ion-grid>
+
+    <ion-row>
+
+      <ion-col>
+        <div>
+          <ion-label>Type</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Du</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Au</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col>
+        <div>
+          <ion-label>Date</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Type</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Part depot</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div>
+          <ion-label>Part Retrait</ion-label>
+          <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor="let mcomm of transaction">
+
+      <ion-col>
+          {{mcomm.dateTransfert | date}}
+      </ion-col>
+
+      <ion-col>
+        {{mcomm.type}}
+      </ion-col>
+
+      <ion-col>
+          {{ '$'+mcomm.partAgenceDepot}}
+      </ion-col>
+
+      <ion-col>
+        {{'$'+mcomm.partAgenceRetrait}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

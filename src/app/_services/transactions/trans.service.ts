@@ -51,4 +51,12 @@ export class TransService {
         })
       );
   }
+  getMesTranscation(){
+    return this.http.get(`${this.API_URL}/transaction/commisons_user`)
+      .pipe(
+        map( data => {
+          return data;
+        })
+      );
+  }
 }

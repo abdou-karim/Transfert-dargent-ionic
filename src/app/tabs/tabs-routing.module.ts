@@ -54,6 +54,17 @@ const routes: Routes = [
               }
             ]
         }
+        ,
+        {
+          path: 'mes-transactions',
+          children:
+            [
+              {
+                path: '',
+                loadChildren: () => import('../pages/mes-transactions/mes-transactions.module').then( m => m.MesTransactionsPageModule)
+              }
+            ]
+        }
       ]
   }
 ];

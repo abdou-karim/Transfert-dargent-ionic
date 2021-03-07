@@ -11,10 +11,12 @@ export class TabsPage implements OnInit {
 
 
   permission: boolean;
+  routeActive = 'mes-transactions';
   constructor(private router: Router, private authS: AuthService) {
     if (this.authS.decodeToken() === 'ROLE_AdminAgence')
     {
       this.permission = true;
+      this.routeActive = 'transaction';
     }
   }
 
