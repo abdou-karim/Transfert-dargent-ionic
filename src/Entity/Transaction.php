@@ -261,7 +261,7 @@ class Transaction
         return $this->partAgenceRetrait;
     }
 
-    public function setPartAgence(int $partAgenceRetrait): self
+    public function setPartAgenceRetrait(int $partAgenceRetrait): self
     {
         $this->partAgenceRetrait = $partAgenceRetrait;
 

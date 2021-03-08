@@ -48,14 +48,14 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
           $parEtat = $frait*0.4;
           $partEntrePrise = $frait*0.3;
           $partAgenceDepot = $frait*0.1;
-          $partAgenceRetrait = $frait*0.2;
           if($data->getType() === "depot")
           {
               $agentP=$this->security->getUser()->getAgencePartenaire();
 
               $comp = $this->compteRepository->getCompte($agentP->getId());
               if($comp->getSolde() >$data->getMontant() ){
-                  $comp->setSolde(($comp->getSolde()-$data->getMontant()) + $partAgenceDepot);
+                  $totalMontantDepot = $data->getMontant() + $frait;
+                  $comp->setSolde(($comp->getSolde()-$totalMontantDepot) + $partAgenceDepot);
                   $data->setPartEtat($parEtat);
                   $data->setCode($this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire()));
                   $data->setPartEntreprise($partEntrePrise);
@@ -88,11 +88,11 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
                $trans->setType('retrait');
                $trans->setPartEtat($transaction->getPartEtat());
                $trans->setPartEntreprise($transaction->getPartEntreprise());
-               $trans->setPartAgence($partAgenceRetrait);
+               $trans->setPartAgenceRetrait($transaction->getPartAgenceDepot()*2);
                $trans->setPartAgenceDepot($transaction->getPartAgenceDepot());
                $trans->setClient($client);
                 $comp = $this->compteRepository->getCompte($agentP->getId());
-                $comp->setSolde($comp->getSolde() + $transaction->getMontant() + $partAgenceRetrait);
+                $comp->setSolde($comp->getSolde() + $transaction->getMontant() + $transaction->getPartAgenceDepot()*2);
                $trans->setDateDexpiration(new \DateTime('now'));
                 $this->entityManager->persist($client);
                 $this->entityManager->persist($trans);

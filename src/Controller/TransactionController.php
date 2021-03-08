@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\TransactionBloquer;
+use App\Repository\CompteRepository;
 use App\Repository\TransactionRepository;
+use App\Service\Frais;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,13 +31,24 @@ class TransactionController extends AbstractController
      * @var Security
      */
     private $security;
+    /**
+     * @var CompteRepository
+     */
+    private $compteRepository;
+    /**
+     * @var Frais
+     */
+    private $frais;
 
-    public function __construct(TransactionRepository $transactionRepository,
-                                EntityManagerInterface $entityManager,Security $security){
+    public function __construct(
+        TransactionRepository $transactionRepository, EntityManagerInterface $entityManager,
+        Security $security, CompteRepository $compteRepository, Frais $frais){
 
         $this->transactionRepository = $transactionRepository;
         $this->entityManager = $entityManager;
         $this->security = $security;
+        $this->compteRepository = $compteRepository;
+        $this->frais = $frais;
     }
     /**
      * @Route(
@@ -84,9 +97,16 @@ class TransactionController extends AbstractController
                return new JsonResponse('Cette transaction est deja retirée !',Response::HTTP_BAD_REQUEST);
            }
         $trans = $this->transactionRepository->findOneBy(['code'=>$requ['code']]);
+        $userAgenceDepot = $trans->getUser();
+        $agentP=$this->security->getUser()->getAgencePartenaire();
+        $compUserBloqueTransaction = $this->compteRepository->getCompte($agentP->getId());
+        $compteUserDepotTransaction = $this->compteRepository->getCompte($userAgenceDepot->getAgencePartenaire()->getId());
+        $totalFaris = $this->frais->getFrais($trans->getMontant());
            $transBloquer = new TransactionBloquer();
            $clientTrans = $trans->getClient();
            $client = new Client();
+           $compUserBloqueTransaction->setSolde($compUserBloqueTransaction->getSolde() + $trans->getMontant() + $totalFaris);
+           $compteUserDepotTransaction->setSolde(($compteUserDepotTransaction->getSolde()-$trans->getPartAgenceDepot()) + $trans->getMontant() + $totalFaris);
            $client->setNomClient($clientTrans->getNomClient())
                     ->setNumeroClient($clientTrans->getNumeroClient())
                     ->setNomBeneficiaire($clientTrans->getNomBeneficiaire())
@@ -95,7 +115,7 @@ class TransactionController extends AbstractController
                         ->setMontant($trans->getMontant())
                         ->setType($trans->getType())
                         ->setClient($client)
-                        ->setUser($trans->getUser())
+                        ->setUser($userAgenceDepot)
                         ->setDateTransfert($trans->getDateTransfert());
            $this->entityManager->persist($transBloquer);
            $this->entityManager->persist($client);
