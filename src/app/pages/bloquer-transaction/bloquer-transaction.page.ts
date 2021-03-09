@@ -71,8 +71,9 @@ export class BloquerTransactionPage implements OnInit {
             subHeader: 'INFOS',
             cssClass: 'basic-alert',
             mode:'ios',
-            message: 'Cette transaction est deja retirée! <ion-icon name="alert-circle-outline" [color]="#e04055"></ion-icon> '
+            message: 'Cette transaction sest deja retirée! <ion-icon name="alert-circle-outline" [color]="#e04055"></ion-icon> '
           });
+          this.etatRequest = false;
           await errBloque.present();
         }
       );

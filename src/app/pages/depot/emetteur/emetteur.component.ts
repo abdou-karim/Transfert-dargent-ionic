@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FraisService} from '../../../_services/calculFaris/frais.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-emetteur',
@@ -11,7 +12,9 @@ export class EmetteurComponent implements OnInit {
   frais: number;
   Total: number;
   submited = false;
-  constructor(private fraisS: FraisService, private  fb: FormBuilder, private beneS: FraisService) { }
+  @Input()BenClick: any;
+  constructor(private fraisS: FraisService, private  fb: FormBuilder,
+              private beneS: FraisService, private router: Router) { }
   emetteurForm: FormGroup;
   ngOnInit() {
     this.emetteurForm = this.fb.group({
@@ -40,6 +43,7 @@ export class EmetteurComponent implements OnInit {
       return;
     }
     this.beneS.beneFVlaue(this.emetteurForm.value);
+
   }
 
 }

@@ -104,6 +104,10 @@
           <ion-icon name="checkmark-done-outline" slot="start"></ion-icon>
           <ion-label>Mes commissions</ion-label>
         </ion-item>
+        <ion-item *ngIf="!permission" button routerLink="/bloquer-transaction">
+          <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
+          <ion-label>Bloquer Transaction</ion-label>
+        </ion-item>
         <ion-item button (click)="deconnexion()">
           <ion-icon name="chevron-back-circle-outline" slot="start"></ion-icon>
           <ion-label >Déconnexion</ion-label>

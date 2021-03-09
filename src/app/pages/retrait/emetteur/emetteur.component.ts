@@ -84,7 +84,14 @@ export class EmetteurComponent implements OnInit {
               cssClass:'confirm',
               handler: () => {
                 this.transS.retrait(retrait).subscribe(
-                  () => {
+                  async () => {
+                    const retraitOk = await this.alertController.create({
+                      cssClass: 'basic-alert',
+                      header: 'Retrait Reussi',
+                      message: '<p>Transaction effectuée avec succes !</p><p>Merci d\'avoir utiliser notre service </p><ion-icon name="checkmark-done-outline" color="succes"></ion-icon>',
+                    });
+
+                    await retraitOk.present();
                     this.router.navigateByUrl('tabs/admin-agence')
                   },
                   async () => {
@@ -95,6 +102,7 @@ export class EmetteurComponent implements OnInit {
                     });
 
                     await alert.present();
+
                   }
                 )
               }

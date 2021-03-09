@@ -5,6 +5,7 @@ import {FraisService} from '../../../_services/calculFaris/frais.service';
 import {TransService} from '../../../_services/transactions/trans.service';
 import {AlertController} from '@ionic/angular';
 import {Transaction} from '../../../_modeles/transaction';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class BeneficiaireComponent implements OnInit {
   beneficiaireForm: FormGroup
   is_submit = false;
   transaction: Transaction;
-  constructor(private fb: FormBuilder, private beneIn: FraisService, private transS: TransService, private alerteCont: AlertController) { }
+  constructor(private fb: FormBuilder, private beneIn: FraisService,
+              private transS: TransService, private alerteCont: AlertController,
+              private router: Router) { }
   ngOnInit() {
     this.beneficiaireForm = this.fb.group({
       nomBeneficiaire : ['', [Validators.required, Validators.pattern('^[A-Z][a-zA-Z? ]{5,20}$')]],
@@ -94,7 +97,7 @@ export class BeneficiaireComponent implements OnInit {
                   subHeader: 'INFOS',
                   cssClass: 'basic-alert',
                   mode:'ios',
-                  message:`Vous avez envoyé ${this.transaction.montant} a ${this.transaction.client.nomBeneficiaire} le ${this.transaction.dateTransfert}`
+                  message:`Vous avez envoyé ${this.transaction.montant} a ${this.transaction.client.nomBeneficiaire} le ${this.transaction.dateTransfert || data}`
                   + `<ion-item><ion-label>CODE TRANSACTION <p>${this.transaction.code}</p></ion-label></ion-item>`,
                   buttons: [
                     {
@@ -108,6 +111,7 @@ export class BeneficiaireComponent implements OnInit {
                   ]
                 });
                 await msg.present();
+                this.router.navigateByUrl('tabs/admin-agence')
               },
               async () => {
                   const errorMsg = await  this.alerteCont.create(({

@@ -7,8 +7,12 @@ ion-content
   }
   .error-message {
     color: red;
-    font-size: 14px;
-    margin: 0 auto;
+    font-size: 12px;
+    margin-left: 15%;
   }
-
+    ion-button
+    {
+      width: 50%;
+      margin: 0 auto;
+    }
 }
