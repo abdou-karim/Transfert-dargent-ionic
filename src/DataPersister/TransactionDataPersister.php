@@ -7,6 +7,7 @@ use App\Repository\TransactionRepository;
 use App\Service\Frais;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
+use Twilio\Rest\Client;
 
 class TransactionDataPersister implements  ContextAwareDataPersisterInterface
 {
@@ -51,17 +52,28 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
           if($data->getType() === "depot")
           {
               $agentP=$this->security->getUser()->getAgencePartenaire();
-
+                $id='ACe19e886fe45f28a8d1cf2b134eb2a306';
+                $token='f84f807df03e0237e1a40ab36cf49dfc';
+                $code = $this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire());
+              $twilio = new Client($id, $token);
               $comp = $this->compteRepository->getCompte($agentP->getId());
               if($comp->getSolde() >$data->getMontant() ){
                   $totalMontantDepot = $data->getMontant() + $frait;
                   $comp->setSolde(($comp->getSolde()-$totalMontantDepot) + $partAgenceDepot);
                   $data->setPartEtat($parEtat);
-                  $data->setCode($this->frais->CreerMatricule($data->getClient()->getNomClient(),$data->getClient()->getNomBeneficiaire()));
+                  $data->setCode($code);
                   $data->setPartEntreprise($partEntrePrise);
                   $data->setPartAgenceDepot($partAgenceDepot);
                   $data->setDateTransfert(new \DateTime('now'));
                   $data->setUser($this->security->getUser());
+                  $twilio->messages->create(
+                      $data->getClient()->getNumeroBeneficiaire(),
+                      [
+                          'from'=> '18647546221',
+                          'body' => 'Vous avez recu un transfer de '.$data->getMontant().' de '.$data->getClient()->getNomClient().' '
+                              .$data->getClient()->getNumeroClient().'RDV chez un agent Money Sa pour retirer votre argent. Votre code de retrait est :'.$code
+                      ]
+                  );
                   $this->entityManager->persist($data);
               }else
               {
