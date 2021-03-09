@@ -23,7 +23,8 @@ transaction: Transaction[] = [];
         (data) => {
           this.transaction =data['hydra:member']
           for (const oneTrnas of this.transaction) {
-            this.tabMontantTotal.push(Number(oneTrnas.montant));
+            this.tabMontantTotal.push(Number(oneTrnas.partAgenceDepot));
+            this.tabMontantTotal.push(Number(oneTrnas.partAgenceRetrait));
             this.MontantTotal = this.tabMontantTotal.reduce(this.addValue);
           }
         }

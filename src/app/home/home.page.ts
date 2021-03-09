@@ -11,7 +11,7 @@ export class HomePage {
   constructor(private router: Router) {
     setTimeout(() => {
       this.router.navigateByUrl('login');
-    }, 2000);
+    }, 3000);
   }
 
 }
