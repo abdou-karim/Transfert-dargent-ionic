@@ -65,29 +65,35 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngFor="let Mtrans of transaction">
+    <ion-card *ngFor="let Mtrans of transaction">
+      <ion-row >
 
-      <ion-col class="mcol">
-        {{Mtrans.dateTransfert | date}}
-      </ion-col>
+        <ion-col class="mcol">
+          {{Mtrans.dateTransfert | date}}
+        </ion-col>
 
-      <ion-col class="mcol">
+        <ion-col class="mcol">
           {{Mtrans.type}}
-      </ion-col>
+        </ion-col>
 
-      <ion-col class="mcol">
+        <ion-col class="mcol">
           {{'$'+Mtrans.montant}}
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="2"></ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label position="fixed"><ion-button>Total</ion-button></ion-label>
-          <ion-input readonly [value]="MontantTotal"></ion-input>
-        </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
 
-      </ion-col>
-    </ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col size="2"></ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="fixed"><ion-button>Total</ion-button></ion-label>
+            <ion-input readonly [value]="MontantTotal"></ion-input>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
   </ion-grid>
 </ion-content>

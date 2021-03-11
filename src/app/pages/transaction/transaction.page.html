@@ -85,36 +85,41 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngFor="let transac of trans">
-      <ion-col size="2" class="mcol">
-     {{transac.dateTransfert | date}}
-      </ion-col>
+    <ion-card  *ngFor="let transac of trans" >
+      <ion-row>
+        <ion-col size="2" class="mcol">
+          {{transac.dateTransfert | date}}
+        </ion-col>
 
-      <ion-col size="3" class="mcol">
-     {{transac.user?.prenom+' '+transac.user?.nom}}
-      </ion-col>
+        <ion-col size="3" class="mcol">
+          {{transac.user?.prenom+' '+transac.user?.nom}}
+        </ion-col>
 
-      <ion-col size="2" class="mcol">
-       {{transac.type}}
-      </ion-col>
+        <ion-col size="2" class="mcol">
+          {{transac.type}}
+        </ion-col>
 
-      <ion-col size="3" class="mcol">
-       {{transac.montant}}
-      </ion-col>
+        <ion-col size="3" class="mcol">
+          {{transac.montant}}
+        </ion-col>
 
-      <ion-col size="2" class="mcol">
+        <ion-col size="2" class="mcol">
           {{transac.partEntreprise + transac.partAgenceDepot + transac.partEtat + transac.partAgenceRetrait}}
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="2"></ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label position="fixed"><ion-button>Total</ion-button></ion-label>
-          <ion-input readonly [value]="MontantTotal"></ion-input>
-        </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-card>
+      <ion-row>
+        <ion-col size="2"></ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="fixed"><ion-button>Total</ion-button></ion-label>
+            <ion-input readonly [value]="MontantTotal"></ion-input>
+          </ion-item>
 
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
   </ion-grid>
 </ion-content>

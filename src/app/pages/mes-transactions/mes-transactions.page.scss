@@ -43,11 +43,16 @@ ion-content
   --ion-background-color: $background;
   ion-grid
   {
+    ion-card{
+      background: white;
+      width: 100%;
+      margin: 0 auto;
+    }
     ion-row
     {
       .mcol
       {
-        border-bottom: 1px solid #000000;
+        border-bottom: 1px solid $myBlue;
       }
       ion-col
       {
