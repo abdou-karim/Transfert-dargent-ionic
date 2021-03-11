@@ -75,19 +75,19 @@
 
     <ion-row *ngFor="let mcomm of transaction">
 
-      <ion-col>
+      <ion-col class="mcol">
           {{mcomm.dateTransfert | date}}
       </ion-col>
 
-      <ion-col>
+      <ion-col class="mcol">
         {{mcomm.type}}
       </ion-col>
 
-      <ion-col>
+      <ion-col class="mcol">
           {{ '$'+mcomm.partAgenceDepot}}
       </ion-col>
 
-      <ion-col>
+      <ion-col class="mcol">
         {{'$'+mcomm.partAgenceRetrait}}
       </ion-col>
     </ion-row>

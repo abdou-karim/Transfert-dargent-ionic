@@ -12,7 +12,8 @@ export class TransactionPage implements OnInit {
 
   tabMontantTotal: number[] = [];
   MontantTotal: number;
-  constructor(private transaction: TransService) { }
+  constructor(private transaction: TransService) {
+  }
 
   ngOnInit() {
     this.getToutMesCommissions();
@@ -21,7 +22,7 @@ export class TransactionPage implements OnInit {
   getToutMesCommissions(){
     return this.transaction.getToutMesCommissions()
       .subscribe(
-        (data => {
+        ((data) => {
           this.trans = data['hydra:member'];
           for (const oneTrnas of this.trans) {
             this.tabMontantTotal.push(Number(oneTrnas.montant));

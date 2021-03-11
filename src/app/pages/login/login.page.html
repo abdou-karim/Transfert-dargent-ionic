@@ -24,7 +24,7 @@
   <div  *ngIf="f.username.errors && submitted">
     <ng-container>
       <div class="error-message" *ngIf="f.username.errors.required"> Numero obligatoire *</div>
-
+      <div class="error-message" *ngIf="f.username.errors.pattern">Numero invalide</div>
     </ng-container>
   </div>
 

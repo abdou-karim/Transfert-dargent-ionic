@@ -67,15 +67,15 @@
 
     <ion-row *ngFor="let Mtrans of transaction">
 
-      <ion-col>
+      <ion-col class="mcol">
         {{Mtrans.dateTransfert | date}}
       </ion-col>
 
-      <ion-col>
+      <ion-col class="mcol">
           {{Mtrans.type}}
       </ion-col>
 
-      <ion-col>
+      <ion-col class="mcol">
           {{'$'+Mtrans.montant}}
       </ion-col>
     </ion-row>

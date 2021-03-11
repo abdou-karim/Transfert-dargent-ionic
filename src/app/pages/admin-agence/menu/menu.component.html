@@ -69,7 +69,7 @@
       </ion-card-header>
       <ion-card-content>
         <ion-item>
-          <ion-label *ngIf="hideShowSomme"> <h1 >{{compte?.solde}} FCF</h1></ion-label>
+          <ion-label *ngIf="hideShowSomme"> <p >{{montant | separator:'.'}} FCF</p></ion-label>
           <span><ion-icon [name]="nameIcone" slot="end" (click)="hideShowSomme=!hideShowSomme" (click)="getClick()"></ion-icon></span>
         </ion-item>
 

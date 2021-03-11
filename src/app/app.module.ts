@@ -12,9 +12,10 @@ import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+import { FormatSoldePipe } from './pipes/solde/format-solde.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FormatSoldePipe],
   entryComponents: [],
   imports: [
     BrowserModule,

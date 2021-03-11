@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../_services/auth.service';
 import {CompteService} from '../../../_services/compte/compte.service';
 import {Compte} from '../../../_modeles/compte';
-import {DatePipe} from '@angular/common';
+
 
 @Component({
   selector: 'app-menu',
@@ -13,6 +13,7 @@ import {DatePipe} from '@angular/common';
 export class MenuComponent implements OnInit {
   permission: boolean;
   compte: Compte;
+  montant:number;
   routeActive = '/tabs/mes-transactions';
   maDate: string = new Date().toISOString();
   hideShowSomme =true;
@@ -26,10 +27,10 @@ export class MenuComponent implements OnInit {
         this.permission = true;
       this.routeActive = '/tabs/transaction';
     }
+    this.getCompteAdminAgence();
   }
 
   ngOnInit() {
-    this.getCompteAdminAgence();
   }
   deconnexion(){
    this.authS.logOut();
@@ -42,12 +43,13 @@ export class MenuComponent implements OnInit {
       .subscribe(
         data => {
          this.compte = data;
-          console.log(data);
+         this.montant = Number(this.compte.solde);
+
         }
       );
   }
-
   getClick() {
+    this.getCompteAdminAgence();
     if(this.hideShowSomme === false){
       this.nameIcone ='eye-off-outline';
     }

@@ -8,6 +8,7 @@ import { AdminAgencePageRoutingModule } from './admin-agence-routing.module';
 
 import { AdminAgencePage } from './admin-agence.page';
 import {MenuComponent} from './menu/menu.component';
+import {SeparatorPipe} from '../../pipes/separator/separator.pipe';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import {MenuComponent} from './menu/menu.component';
     IonicModule.forRoot(),
     AdminAgencePageRoutingModule,
   ],
-  declarations: [AdminAgencePage, MenuComponent]
+    declarations: [AdminAgencePage, MenuComponent, SeparatorPipe]
 })
 export class AdminAgencePageModule {}
