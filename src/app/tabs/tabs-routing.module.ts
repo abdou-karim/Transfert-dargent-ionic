@@ -65,6 +65,17 @@ const routes: Routes = [
               }
             ]
         }
+        ,
+        {
+          path: 'admin-systeme',
+          children:
+            [
+              {
+                path: '',
+                loadChildren: () => import('../pages/admin-systeme/admin-systeme.module').then( m => m.AdminSystemePageModule)
+              }
+            ]
+        }
       ]
   }
 ];

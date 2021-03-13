@@ -2,19 +2,19 @@
   <ion-tabs>
     <ion-tab-bar slot="bottom">
 
-      <ion-tab-button tab="admin-agence">
+      <ion-tab-button tab="{{routeAdmin}}">
         <ion-icon name="home"></ion-icon>
       </ion-tab-button>
 
-      <ion-tab-button tab="{{routeActive}}">
+      <ion-tab-button tab="{{routeActive}}" *ngIf="permissionAdAndUserAg">
         <ion-icon name="time-outline"></ion-icon>
       </ion-tab-button>
 
-      <ion-tab-button tab="mes-commissions" *ngIf="permission">
+      <ion-tab-button tab="mes-commissions" *ngIf="permission && permissionAdAndUserAg">
         <ion-icon name="checkmark-done-outline"></ion-icon>
       </ion-tab-button>
 
-      <ion-tab-button tab="calcule-frais">
+      <ion-tab-button tab="calcule-frais" *ngIf="permissionAdAndUserAg">
         <ion-icon name="calculator-outline"></ion-icon>
       </ion-tab-button>
 

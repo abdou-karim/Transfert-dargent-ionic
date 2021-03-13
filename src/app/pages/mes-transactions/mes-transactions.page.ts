@@ -21,7 +21,7 @@ export class MesTransactionsPage implements OnInit {
   getMestransaction(){
     return this.trans.getMesTranscation()
       .subscribe(
-        (data) => {
+        data => {
          this.transaction = data['hydra:member'];
           for (const oneTrnas of this.transaction) {
             this.tabMontantTotal.push(Number(oneTrnas.montant));

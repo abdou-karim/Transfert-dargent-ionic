@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../_services/auth.service';
 import {CompteService} from '../../../_services/compte/compte.service';
 import {Compte} from '../../../_modeles/compte';
+import {UtilsService} from '../../../_services/utiles/utils.service';
 
 
 @Component({
@@ -12,8 +13,9 @@ import {Compte} from '../../../_modeles/compte';
 })
 export class MenuComponent implements OnInit {
   permission: boolean;
+  permissionAgAndUserAg:boolean;
   compte: Compte;
-  montant:number;
+  montant:string;
   routeActive = '/tabs/mes-transactions';
   maDate: string = new Date().toISOString();
   hideShowSomme =true;
@@ -21,11 +23,15 @@ export class MenuComponent implements OnInit {
   myDate = new Date();
   today: number = Date.now();
 
-  constructor(private router: Router, private authS: AuthService, private compteS: CompteService) {
+  constructor(private router: Router, private authS: AuthService,
+              private compteS: CompteService,private utilService: UtilsService) {
     if (this.authS.decodeToken() === 'ROLE_AdminAgence')
     {
         this.permission = true;
       this.routeActive = '/tabs/transaction';
+    }
+    if(this.authS.decodeToken() === 'ROLE_AdminAgence' || this.authS.decodeToken() ==='ROLE_UtilisateurAgence'){
+      this.permissionAgAndUserAg = true;
     }
     this.getCompteAdminAgence();
   }
@@ -43,7 +49,9 @@ export class MenuComponent implements OnInit {
       .subscribe(
         data => {
          this.compte = data;
-         this.montant = Number(this.compte.solde);
+         if(this.compte && this.compte.solde){
+           this.montant = this.utilService.formatPrice(Number(this.compte.solde),'.');
+         }
 
         }
       );

@@ -9,7 +9,6 @@ import {Transaction} from '../../_modeles/transaction';
 })
 export class TransactionPage implements OnInit {
   trans: Transaction[] = [];
-
   tabMontantTotal: number[] = [];
   MontantTotal: number;
   constructor(private transaction: TransService) {
@@ -22,14 +21,13 @@ export class TransactionPage implements OnInit {
   getToutMesCommissions(){
     return this.transaction.getToutMesCommissions()
       .subscribe(
-        ((data) => {
+         data => {
           this.trans = data['hydra:member'];
           for (const oneTrnas of this.trans) {
             this.tabMontantTotal.push(Number(oneTrnas.montant));
             this.MontantTotal = this.tabMontantTotal.reduce(this.addValue);
           }
-        })
-      );
+        });
   }
   addValue(a,b){
     return a + b;

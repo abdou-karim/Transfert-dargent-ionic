@@ -1,18 +1,6 @@
-ion-content
-{
-  font-family: Cormorant Garamond, serif;
+@import "src/app/pages/sccs/partial/emetteurRecepteur";
   .frais{
     width: 50%;
     float: right;
   }
-  .error-message {
-    color: red;
-    font-size: 12px;
-    margin-left: 15%;
-  }
-    ion-button
-    {
-      width: 50%;
-      margin: 0 auto;
-    }
-}
+

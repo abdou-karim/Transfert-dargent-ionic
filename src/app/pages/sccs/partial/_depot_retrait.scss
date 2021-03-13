@@ -1,0 +1,44 @@
+$background:#E5E5E5;
+$myBlue:#07AEEF;
+:host {
+  --st-indicator-color: #E56946;
+}
+ion-header{
+  font-family: Cormorant Garamond, serif;
+  .mayCarde{
+    background: white;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
+    margin: 0;
+    padding: 0;
+    height: 35vh;
+    ion-card-header
+    {
+      text-align: center;
+      ion-icon
+      {
+        float: left;
+        color:$myBlue;
+      }
+    }
+    .footer
+    {
+      margin: 0 auto;
+      border-bottom: 5px solid $myBlue;
+      width: 50%;
+      font-weight: bold;
+      ion-item
+      {
+        text-align: center;
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+

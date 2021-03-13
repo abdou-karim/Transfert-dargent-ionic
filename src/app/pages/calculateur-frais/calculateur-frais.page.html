@@ -19,20 +19,22 @@
   <ion-content>
 
     <div class="mDiv">
-      <ion-item>
-        <ion-label position="stacked">Type de transaction</ion-label>
-        <ion-input value="depot" readonly></ion-input>
-      </ion-item>
+      <ion-card>
+        <ion-item>
+          <ion-label position="stacked">Type de transaction</ion-label>
+          <ion-input value="depot" readonly></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Montant</ion-label>
-        <ion-input #fraisIput type="number" min="0" (ionChange)="getFrais(fraisIput.value)"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Montant</ion-label>
+          <ion-input #fraisIput type="number" min="0" (ionChange)="getFrais(fraisIput.value)"></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Frais</ion-label>
-        <ion-input readonly [value]="frais"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Frais</ion-label>
+          <ion-input readonly [value]="frais"></ion-input>
+        </ion-item>
+      </ion-card>
     </div>
 
   </ion-content>

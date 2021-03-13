@@ -15,4 +15,10 @@ export class CompteService {
         retry(1),
       );
   }
+  getTousLesComptes(){
+    return  this.http.get<any>(`${this.API_URL}/adminSysteme/comptes`)
+      .pipe(
+        retry(1),
+      );
+  }
 }

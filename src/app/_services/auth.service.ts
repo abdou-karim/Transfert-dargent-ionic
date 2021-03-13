@@ -52,9 +52,14 @@ export class AuthService {
     const token = this.currentUserValue.token;
     const helper = new JwtHelperService();
     const decodeToken = helper.decodeToken(token);
-    if (decodeToken.roles[0] === 'ROLE_AdminAgence' || decodeToken.roles[0] === 'ROLE_UtilisateurAgence') {
+    if (decodeToken.roles[0] === 'ROLE_AdminAgence' || decodeToken.roles[0] === 'ROLE_UtilisateurAgence')
+    {
       this.router.navigateByUrl('tabs/admin-agence');
-      return decodeToken.roles[0];
     }
+    if(decodeToken.roles[0] === 'ROLE_AdminSysteme' || decodeToken.roles[0] === 'ROLE_Caissier')
+    {
+      this.router.navigateByUrl('tabs/admin-systeme');
+    }
+    return decodeToken.roles[0];
   }
 }

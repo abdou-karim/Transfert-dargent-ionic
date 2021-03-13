@@ -20,7 +20,7 @@ transaction: Transaction[] = [];
   getMesComission(){
     return this.trans.getToutMesCommissions()
       .subscribe(
-        (data) => {
+        data => {
           this.transaction =data['hydra:member']
           for (const oneTrnas of this.transaction) {
             this.tabMontantTotal.push(Number(oneTrnas.partAgenceDepot));

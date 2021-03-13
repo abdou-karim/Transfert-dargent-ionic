@@ -35,6 +35,11 @@ ion-app {
     font-family: Cormorant Garamond, serif;
     .mDiv{
       margin: 20% auto;
+      ion-card{
+        background: white;
+        width: 100%;
+        margin: 0 auto;
+      }
     }
 
   }
