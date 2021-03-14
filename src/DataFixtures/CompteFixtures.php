@@ -16,22 +16,23 @@ class CompteFixtures extends Fixture implements DependentFixtureInterface
             $tabAgencePartenaire[] = $this->getReference(AgencePartenaireFixtures::getReferenceAgencePKey($i% 2));
             $tabAdminsysteme [] = $this->getReference(UserFixtures::getReferenceAdminSystemeKey($i%2));
         }
-        $tabNumeroCompte = ['6037f4cf79f4b3.78291468','60393a9f6f9422.48397157'];
+        $tabNumeroCompte = ['6037f4cf79f4b3.78291468','48397157.60393a9f6f9422'];
         $tabSolde = ['10000000','500000'];
 
         for ($a = 0 ;$a <2 ;$a ++){
             $compte = new Compte();
             $compte->setNumeroCompte($tabNumeroCompte[$a])
                 ->setDateCreationCompte(new \DateTime('now'))
-                ->setSolde($fake->unique()->randomElement($tabSolde))
+                ->setSolde($tabSolde[$a])
                 ->setArchivage(false);
             foreach ($tabNumeroCompte as $value){
-               $compte ->setUser($fake->randomElement($tabAdminsysteme));
-                $compte->setAgencePartenaire($fake->randomElement($tabAgencePartenaire));
+               $compte ->setUser($fake->unique(true)->randomElement($tabAdminsysteme));
+                $compte->setAgencePartenaire($fake->unique(true)->randomElement($tabAgencePartenaire));
             }
             $manager->persist($compte);
+            $manager->flush();
         }
-        $manager->flush();
+
     }
 
     public function getDependencies()

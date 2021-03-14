@@ -17,7 +17,7 @@ class AgencePartenaireFixtures extends Fixture implements DependentFixtureInterf
         $tabAgencePartenaire = ['Basse_Service','Sidibe_Service'];
         for($o=0;$o<5;$o++){
             $tabAdAg [] = $this->getReference(UserFixtures::getReferenceAdminAgenceKey($o% 2));
-            $tabUAg [] = $this->getReference(UserFixtures::getReferenceUtilisateurAgenceKey($o%5));
+            $tabUAg [] = $this->getReference(UserFixtures::getReferenceUtilisateurAgenceKey($o% 2));
         }
         for ($i = 0;$i<2;$i++){
             $agencePartenaire = new AgencePartenaire();

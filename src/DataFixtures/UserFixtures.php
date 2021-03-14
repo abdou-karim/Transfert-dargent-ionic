@@ -30,22 +30,19 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $fake = Factory::create('fr-FR');
         for($i = 0; $i <=3;$i++){
             $userProfil = $this->getReference(ProfileFixtures::getReferenceKey($i%4));
+            $nbrUser = 2;
             if($userProfil -> getLibelle() === "AdminAgence"){
                 $tabTelephone = ['771656565','771232323'];
-                $nbrUser = 2;
             }
             if($userProfil -> getLibelle() === "UtilisateurAgence")
             {
-                $nbrUser = 5 ;
-                $tabTelephone = ['761656565','761232323','768888888','769990909','766665555'];
+                $tabTelephone = ['761656565','761232323'];
             }
             if($userProfil -> getLibelle() === "Caissier"){
-                $nbrUser = 5;
-                $tabTelephone = ['701656565','701232323','708888888','709990909','706665555'];
+                $tabTelephone = ['701656565','701232323','708888888'];
             }
             if($userProfil -> getLibelle() === "AdminSysteme"){
                 $tabTelephone = ['751656565','751232323'];
-                $nbrUser = 2;
             }
             for ($u = 0 ;$u <$nbrUser; $u ++){
                 $user =  new User();
