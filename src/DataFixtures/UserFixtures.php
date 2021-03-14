@@ -15,6 +15,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     public static function getReferenceUtilisateurAgenceKey($i){
         return sprintf('utilisateur_agence%s',$i);
     }
+    public static function getReferenceAdminSystemeKey($i){
+        return sprintf('admin_systeme%s',$i);
+    }
     private $encode;
 
     public function __construct(UserPasswordEncoderInterface $encode)
@@ -26,14 +29,23 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     {
         $fake = Factory::create('fr-FR');
         for($i = 0; $i <=3;$i++){
-            $nbrUser = 5;
             $userProfil = $this->getReference(ProfileFixtures::getReferenceKey($i%4));
+            if($userProfil -> getLibelle() === "AdminAgence"){
+                $tabTelephone = ['771656565','771232323'];
+                $nbrUser = 2;
+            }
             if($userProfil -> getLibelle() === "UtilisateurAgence")
             {
                 $nbrUser = 5 ;
+                $tabTelephone = ['761656565','761232323','768888888','769990909','766665555'];
             }
             if($userProfil -> getLibelle() === "Caissier"){
                 $nbrUser = 5;
+                $tabTelephone = ['701656565','701232323','708888888','709990909','706665555'];
+            }
+            if($userProfil -> getLibelle() === "AdminSysteme"){
+                $tabTelephone = ['751656565','751232323'];
+                $nbrUser = 2;
             }
             for ($u = 0 ;$u <$nbrUser; $u ++){
                 $user =  new User();
@@ -43,7 +55,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     ->setEmail($fake -> email)
                     ->setNom($fake ->name)
                     ->setPrenom($fake -> firstName)
-                    ->setUsername($fake -> userName)
+                    ->setUsername($fake->unique()->randomElement($tabTelephone))
                     ->setTelephone($fake -> phoneNumber)
                     ->setPassword($password);
                 if($userProfil -> getLibelle() === "AdminAgence"){
@@ -51,6 +63,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 }
                 if($userProfil -> getLibelle() === "UtilisateurAgence"){
                     $this->addReference(self::getReferenceUtilisateurAgenceKey($u),$user);
+                }
+                if($userProfil -> getLibelle() === "AdminSysteme"){
+                    $this->addReference(self::getReferenceAdminSystemeKey($u),$user);
                 }
                 $manager->persist($user);
             }

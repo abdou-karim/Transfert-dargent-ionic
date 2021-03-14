@@ -14,16 +14,17 @@ class AgencePartenaireFixtures extends Fixture implements DependentFixtureInterf
     public function load(ObjectManager $manager)
     {
         $fake = Factory::create('fr-FR');
-        $tabAgencePartenaire = ['Basse_Service','Sidibe_Service','Fatou_Service','Rangba_Service','Samba_Service'];
-        for($o=0;$o<25;$o++){
-            $tabAdAg [] = $this->getReference(UserFixtures::getReferenceAdminAgenceKey($o% 5));
-            $tabUAg [] = $this->getReference(UserFixtures::getReferenceUtilisateurAgenceKey($o%25));
+        $tabAgencePartenaire = ['Basse_Service','Sidibe_Service'];
+        for($o=0;$o<5;$o++){
+            $tabAdAg [] = $this->getReference(UserFixtures::getReferenceAdminAgenceKey($o% 2));
+            $tabUAg [] = $this->getReference(UserFixtures::getReferenceUtilisateurAgenceKey($o%5));
         }
-        for ($i = 0;$i<5;$i++){
+        for ($i = 0;$i<2;$i++){
             $agencePartenaire = new AgencePartenaire();
             $agencePartenaire ->setNom($tabAgencePartenaire[$i])
                 ->setEmail($fake->email)
                 ->setTelephone($fake->phoneNumber)
+                ->setArchivage(false)
                 ->setAdresse($fake -> address);
             foreach ($tabAgencePartenaire as $value){
                 $agencePartenaire ->addUser($fake->unique(true)->randomElement($tabAdAg));
