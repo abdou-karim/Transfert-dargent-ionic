@@ -36,3 +36,7 @@ Rien de plus simple taper la commande : php bin/console doctrine:fixtures:load .
  Taper la commande : git clone --branch front https://github.com/abdou-karim/Transfert-dargent-ionic.git  
 ### Changer aussi le nom du dossier et nommez le tranfert_dargent_front  
 Vous devez aussi l'ouvrir avec l'un de vos editeur  
+Mainteant taper la commande: npm install   
+pour relancer les dependances  .
+Lancer le serveur en tapant la commande :  
+ionic serve --lab
