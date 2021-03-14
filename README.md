@@ -31,3 +31,4 @@ Initialiser les donnees avec fixtures :
 Rien de plus simple taper la commande : php bin/console doctrine:fixtures:load .  
 # 2)
  Pour importer la base de donnee aller sur phpMyadmin choisir l'option importer clicquer sur parcourir et choisissez la base de donnee sur la racine du projet .  
+ # Mainteant allez dans l'autre branche front pour cloner le projet frontend .
