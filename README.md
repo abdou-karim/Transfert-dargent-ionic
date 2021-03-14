@@ -39,7 +39,7 @@ Vous devez aussi l'ouvrir avec l'un de vos editeur
 Mainteant taper la commande: npm install   
 pour relancer les dependances  .
 Lancer le serveur en tapant la commande :  
-ionic serve --lab
+ionic serve --lab  
 De preferance travailler sur chrome mais vous pouvez travailler sur le navigateur qui vous plait.  
 Taper l'adresse : localhost:8200 sur votre navigateur  
 Si vous etes sur l'interface de connexion vous pouvez vous connecter en tant :  
