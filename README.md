@@ -10,7 +10,8 @@ Pour :
 - Finaliser la migration : php bin/console doctrine:schema:update --force .
 
 Maintenant vous allez devoir reconfigurer le systeme d'authentification sinon vous ne pourrez pas vous connecter .
-Pas de soucis rien de plus facile que ca vous allez seulement taper quelques commandes . Allons y !!!!
+Pas de soucis rien de plus facile que ca vous allez seulement taper quelques commandes .
+Allons y !!!! .
 Pour commancer taper la commande : mkdir config/jwt
 Nous allons ensuite générer la clé privé avec openssl: openssl genrsa -out config/jwt/private.pem -aes256 4096
 La console va te demander de renseigner un pass phrase, c'est comme un mot de passe pour sécuriser ton token, moi je vais saisir Sidibe123 et confirmer le encore .
