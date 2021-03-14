@@ -33,3 +33,6 @@ Rien de plus simple taper la commande : php bin/console doctrine:fixtures:load .
 # 2)
  Pour importer la base de donnee aller sur phpMyadmin choisir l'option importer clicquer sur parcourir et choisissez la base de donnee sur la racine du projet .  
  # Mainteant allez dans l'autre branche front pour cloner le projet frontend .
+ Taper la commande : git clone --branch front https://github.com/abdou-karim/Transfert-dargent-ionic.git  
+### Changer aussi le nom du dossier et nommez le tranfert_dargent_front  
+Vous devez aussi l'ouvrir avec l'un de vos editeur  
