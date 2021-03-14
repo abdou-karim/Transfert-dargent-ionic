@@ -40,3 +40,11 @@ Mainteant taper la commande: npm install
 pour relancer les dependances  .
 Lancer le serveur en tapant la commande :  
 ionic serve --lab
+De preferance travailler sur chrome mais vous pouvez travailler sur le navigateur qui vous plait.  
+Taper l'adresse : localhost:8200 sur votre navigateur  
+Si vous etes sur l'interface de connexion vous pouvez vous connecter en tant :  
+## Admin :
+#### telephone: 771656565  
+#### password: Sidibe123  
+## Utilisateur angence :  
+Veuillez allez sur phpMyadmin pour choisir un utilisateur agence
