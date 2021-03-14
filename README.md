@@ -19,10 +19,10 @@ Il faut ensuite générer la clé public: openssl rsa -pubout -in config/jwt/pri
 Saisi le même pass phrase que tout à l'heure et c'est bon.
 l faut ensuite renseigner le passphrase dans le fichier .env.local .
 Donc Creer un fichier .env.local dans la racine du projet et copiais y ceci :
-
+\n
 ###> lexik/jwt-authentication-bundle ###
-JWT_PASSPHRASE=Sidibe123
-###< lexik/jwt-authentication-bundle ###
+JWT_PASSPHRASE=Sidibe123\n
+###< lexik/jwt-authentication-bundle ### \n
 Maintenant tout est ok vous pouvez lancer votre serveur : php bin/console server:run
 
 Pour initialiser les donnees vous pouvez soit lancer les fixtures soit importer la base de donnee deja disponible sur la racine du projet .
