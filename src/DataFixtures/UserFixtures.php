@@ -30,10 +30,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $userProfil = $this->getReference(ProfileFixtures::getReferenceKey($i%4));
             if($userProfil -> getLibelle() === "UtilisateurAgence")
             {
-                $nbrUser = 25 ;
+                $nbrUser = 5 ;
             }
             if($userProfil -> getLibelle() === "Caissier"){
-                $nbrUser = 10;
+                $nbrUser = 5;
             }
             for ($u = 0 ;$u <$nbrUser; $u ++){
                 $user =  new User();

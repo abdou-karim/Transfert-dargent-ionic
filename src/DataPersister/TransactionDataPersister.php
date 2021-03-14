@@ -67,13 +67,20 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
                   $data->setDateTransfert(new \DateTime('now'));
                   $data->setUser($this->security->getUser());
                   $twilio->messages->create(
-                      $data->getClient()->getNumeroBeneficiaire(),
+                      '221771659895',
                       [
                           'from'=> '18647546221',
                           'body' => 'Vous avez recu un transfer de '.$data->getMontant().' de '.$data->getClient()->getNomClient().' '
                               .$data->getClient()->getNumeroClient().'RDV chez un agent Money Sa pour retirer votre argent. Votre code de retrait est :'.$code
                       ]
                   );
+              /*    $twilio->messages
+                      ->create("whatsapp:+221771659895", // to
+                          array(
+                              "from" => "whatsapp:+14155238886",
+                              "body" => "Your appointment is coming up on July 21 at 3PM"
+                          )
+                      );*/
                   $this->entityManager->persist($data);
               }else
               {

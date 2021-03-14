@@ -11,7 +11,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity(repositoryClass=TransactionRepository::class)
  * @ApiResource(
  *     routePrefix="transaction",
- *     attributes={},
+ *     attributes={
+ *          "pagination_enabled"=true,
+ *          "pagination_items_per_page"=5,
+ *     },
  *     collectionOperations={
  *          "get_commision_utilisateurAgence"={
  *              "method"="GET",
