@@ -1,6 +1,7 @@
 # Transfert-dargent-ionic-back
 Pour cloner le projet back taper la commande : git clone https://github.com/abdou-karim/Transfert-dargent-ionic.git  
 Vous attendez que le telechargement se termine.  
+### Changer le nom du dossier et nommez le transfert_dargent_back  
 Apres ouvrez le projet avec votre editeur preferé par exemple phpStorm ou Vscode .  
 Taper la commande : composer install pour mettre a jour les dependances .  
 
