@@ -47,4 +47,4 @@ Si vous etes sur l'interface de connexion vous pouvez vous connecter en tant :
 #### telephone: 771656565  
 #### password: Sidibe123  
 ## Utilisateur angence :  
-Veuillez allez sur phpMyadmin pour choisir un utilisateur agence
+Veuillez aller sur phpMyadmin pour choisir un utilisateur agence
