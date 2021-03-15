@@ -26,7 +26,7 @@ class CompteFixtures extends Fixture implements DependentFixtureInterface
                 ->setSolde($tabSolde[$a])
                 ->setArchivage(false);
             foreach ($tabNumeroCompte as $value){
-              
+                $compte->setUser($fake->unique(true)->randomElement($tabAdminsysteme));
                 $compte->setAgencePartenaire($fake->unique(true)->randomElement($tabAgencePartenaire));
             }
             $manager->persist($compte);
