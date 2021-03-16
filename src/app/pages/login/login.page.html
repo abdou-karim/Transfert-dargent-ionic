@@ -19,7 +19,7 @@
 <div class="mycontent">
   <ion-item [mode]="'ios' || 'md'">
     <ion-label position="floating">Telephonne</ion-label>
-    <ion-input formControlName="username" [ngClass]="{'is-valid': submitted && f.username.errors}" ></ion-input>
+    <ion-input #usernameInput formControlName="username" [ngClass]="{'is-valid': submitted && f.username.errors}" (focusout)="getAllProfiles(usernameInput.value)"></ion-input>
   </ion-item>
   <div  *ngIf="f.username.errors && submitted">
     <ng-container>
@@ -38,7 +38,14 @@
       <div class="error-message" *ngIf="f.password.errors.pattern">Mot de passe incorrecte</div>
     </ng-container>
   </div>
-
+  <ion-item *ngIf="newBoo === true">
+    <ion-label>Profile</ion-label>
+    <ion-select (ionChange)="checkProfile(profilList.value)" #profilList>
+      <ion-select-option  *ngFor=" let prof of profile?.profiles" >
+          <h3>{{prof.libelle}}</h3>
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
   <br>
   <div style="margin-left: 15px">
     <ion-label style="color: #07AEEF">Mot de passe oublié ?</ion-label>

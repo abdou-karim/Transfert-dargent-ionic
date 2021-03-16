@@ -6,6 +6,7 @@ import {TransService} from '../../../_services/transactions/trans.service';
 import {AlertController} from '@ionic/angular';
 import {Transaction} from '../../../_modeles/transaction';
 import {Router} from '@angular/router';
+import {UtilsService} from '../../../_services/utiles/utils.service';
 
 
 @Component({
@@ -14,12 +15,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./beneficiaire.component.scss'],
 })
 export class BeneficiaireComponent implements OnInit {
-  beneficiaireForm: FormGroup
+  beneficiaireForm: FormGroup;
   is_submit = false;
   transaction: Transaction;
   constructor(private fb: FormBuilder, private beneIn: FraisService,
               private transS: TransService, private alerteCont: AlertController,
-              private router: Router) { }
+              private router: Router, private uService: UtilsService) { }
   ngOnInit() {
     this.beneficiaireForm = this.fb.group({
       nomBeneficiaire : ['', [Validators.required, Validators.pattern('^[A-Z][a-zA-Z? ]{5,20}$')]],
@@ -27,7 +28,7 @@ export class BeneficiaireComponent implements OnInit {
     });
   }
   get b (){
-    return this.beneficiaireForm.controls
+    return this.beneficiaireForm.controls;
   }
   async beneSubmit() {
     this.is_submit = true;
@@ -92,6 +93,7 @@ export class BeneficiaireComponent implements OnInit {
               async (data) => {
                 // @ts-ignore
                 this.transaction = data;
+                this.uService.setEtatTransaction(true);
                 const msg = await this.alerteCont.create({
                   header: 'Transfert reussi',
                   subHeader: 'INFOS',
@@ -111,7 +113,7 @@ export class BeneficiaireComponent implements OnInit {
                   ]
                 });
                 await msg.present();
-                this.router.navigateByUrl('tabs/admin-agence')
+                this.router.navigateByUrl('tabs/admin-agence');
               },
               async () => {
                   const errorMsg = await  this.alerteCont.create(({

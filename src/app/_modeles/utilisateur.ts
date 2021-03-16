@@ -5,10 +5,12 @@ export interface Utilisateur {
   prenom: string;
   telephone: string;
   nom: string;
-  profile: {
+  profiles: [
+    {
     id: number,
     libelle: string
-  };
+  }
+  ];
   agencePartenaire:
     {
       id: number;

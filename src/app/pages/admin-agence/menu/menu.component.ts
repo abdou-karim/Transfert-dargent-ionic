@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../_services/auth.service';
 import {CompteService} from '../../../_services/compte/compte.service';
@@ -13,29 +13,28 @@ import {UtilsService} from '../../../_services/utiles/utils.service';
 })
 export class MenuComponent implements OnInit {
   permission: boolean;
-  permissionAgAndUserAg:boolean;
+  permissionAgAndUserAg: boolean;
   compte: Compte;
-  montant:string;
+  montant: string;
   routeActive = '/tabs/mes-transactions';
   maDate: string = new Date().toISOString();
-  hideShowSomme =true;
+  hideShowSomme = true;
   nameIcone = 'eye-outline';
   myDate = new Date();
   today: number = Date.now();
 
   constructor(private router: Router, private authS: AuthService,
-              private compteS: CompteService,private utilService: UtilsService) {
+              private compteS: CompteService, private utilService: UtilsService) {
     if (this.authS.decodeToken() === 'ROLE_AdminAgence')
     {
         this.permission = true;
-      this.routeActive = '/tabs/transaction';
+        this.routeActive = '/tabs/transaction';
     }
-    if(this.authS.decodeToken() === 'ROLE_AdminAgence' || this.authS.decodeToken() ==='ROLE_UtilisateurAgence'){
+    if (this.authS.decodeToken() === 'ROLE_AdminAgence' || this.authS.decodeToken() === 'ROLE_UtilisateurAgence'){
       this.permissionAgAndUserAg = true;
     }
     this.getCompteAdminAgence();
   }
-
   ngOnInit() {
   }
   deconnexion(){
@@ -48,9 +47,9 @@ export class MenuComponent implements OnInit {
     return this.compteS.getCompteAdminAgence()
       .subscribe(
         data => {
-         this.compte = data;
-         if(this.compte && this.compte.solde){
-           this.montant = this.utilService.formatPrice(Number(this.compte.solde),'.');
+          this.compte = data;
+          if (this.compte && this.compte.solde){
+           this.montant = this.utilService.formatPrice(Number(this.compte.solde), '.');
          }
 
         }
@@ -58,8 +57,8 @@ export class MenuComponent implements OnInit {
   }
   getClick() {
     this.getCompteAdminAgence();
-    if(this.hideShowSomme === false){
-      this.nameIcone ='eye-off-outline';
+    if (this.hideShowSomme === false){
+      this.nameIcone = 'eye-off-outline';
     }
     else
     {

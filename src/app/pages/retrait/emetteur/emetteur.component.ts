@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TransService} from '../../../_services/transactions/trans.service';
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {UtilsService} from '../../../_services/utiles/utils.service';
 
 @Component({
   selector: 'app-emetteur',
@@ -19,7 +20,7 @@ export class EmetteurComponent implements OnInit {
   boo = false;
   mcni: string;
   constructor(private fb: FormBuilder, private transS: TransService,
-              private alertController: AlertController,private router: Router) { }
+              private alertController: AlertController, private router: Router, private uService: UtilsService) { }
 
   ngOnInit() {
     this.cniForm = this.fb.group({
@@ -85,6 +86,7 @@ export class EmetteurComponent implements OnInit {
               handler: () => {
                 this.transS.retrait(retrait).subscribe(
                   async () => {
+                    this.uService.setEtatTransaction(true);
                     const retraitOk = await this.alertController.create({
                       cssClass: 'basic-alert',
                       header: 'Retrait Reussi',
@@ -92,7 +94,7 @@ export class EmetteurComponent implements OnInit {
                     });
 
                     await retraitOk.present();
-                    this.router.navigateByUrl('tabs/admin-agence')
+                    this.router.navigateByUrl('tabs/admin-agence');
                   },
                   async () => {
                     const alert = await this.alertController.create({

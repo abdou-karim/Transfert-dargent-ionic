@@ -24,8 +24,8 @@ export class AuthService {
   public get currentUserValue(): Utilisateur {
     return this.currentUserSubject.value;
   }
-  login(username: string, password: string) {
-    return this.http.post<any>(`${this.API_URL}/login`, { username, password })
+  login(username: string, password: string, role?: {}) {
+    return this.http.post<any>(`${this.API_URL}/login`, { username, password, roles: role })
       .pipe(
         // tslint:disable-next-line:no-shadowed-variable
         map(Users => {
@@ -61,5 +61,14 @@ export class AuthService {
       this.router.navigateByUrl('tabs/admin-systeme');
     }
     return decodeToken.roles[0];
+  }
+  getAllProfileByUsername(username: {}): Observable<Utilisateur>
+  {
+    return this.http.put<Utilisateur>(`${this.API_URL}/log/username`, username)
+      .pipe(
+        map( data => {
+          return data;
+        })
+      );
   }
 }

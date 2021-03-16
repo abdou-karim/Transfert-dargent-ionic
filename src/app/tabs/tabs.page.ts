@@ -23,7 +23,7 @@ export class TabsPage implements OnInit {
     if (this.authS.decodeToken() === 'ROLE_AdminAgence' || this.authS.decodeToken() === 'ROLE_UtilisateurAgence'){
       this.permissionAdAndUserAg = true;
     }
-    if(this.authS.decodeToken() === 'ROLE_AdminSysteme' || this.authS.decodeToken() === 'ROLE_Caissier'){
+    if (this.authS.decodeToken() === 'ROLE_AdminSysteme' || this.authS.decodeToken() === 'ROLE_Caissier'){
       this.routeAdmin = 'admin-systeme';
     }
   }

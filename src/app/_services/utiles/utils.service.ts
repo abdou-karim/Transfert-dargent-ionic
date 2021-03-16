@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
-
+  private etatTransaction = new BehaviorSubject(false);
   constructor() { }
 
   // tslint:disable-next-line:typedef
@@ -21,5 +22,11 @@ export class UtilsService {
       nombre = nombre.replace( reg, '$1' + seo + '$2');
     }
     return nombre;
+  }
+  get valueEtatTranaction(){
+    return  this.etatTransaction.value;
+  }
+  setEtatTransaction(boole: boolean){
+    this.etatTransaction.next(boole);
   }
 }
