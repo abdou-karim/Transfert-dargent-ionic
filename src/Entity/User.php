@@ -158,14 +158,6 @@ class User implements UserInterface
      */
     private $archivage;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Profile::class, inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     * @Groups({"user:read", "user:write"})
-     * @Groups("compte:read")
-     *  @Groups({"trans_TTmcommission:read"})
-     */
-    private $profile;
 
     /**
      * @ORM\ManyToOne(targetEntity=AgencePartenaire::class, inversedBy="user")
@@ -192,11 +184,20 @@ class User implements UserInterface
      */
     private $transactionBloquers;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Profile::class, inversedBy="users")
+     *  @Groups({"user:read", "user:write"})
+     * @Groups("compte:read")
+     *  @Groups({"trans_TTmcommission:read"})
+     */
+    private $profiles;
+
     public function __construct()
     {
         $this->comptes = new ArrayCollection();
         $this->transactions = new ArrayCollection();
         $this->transactionBloquers = new ArrayCollection();
+        $this->profiles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,7 +229,10 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] =  'ROLE_'.$this->profile->getLibelle();
+        foreach ($this->profiles as $value){
+            $roles[] =  'ROLE_'.$value->getLibelle();
+        }
+
 
         return array_unique($roles);
     }
@@ -331,18 +335,6 @@ class User implements UserInterface
     public function setArchivage(bool $archivage): self
     {
         $this->archivage = $archivage;
-
-        return $this;
-    }
-
-    public function getProfile(): ?Profile
-    {
-        return $this->profile;
-    }
-
-    public function setProfile(?Profile $profile): self
-    {
-        $this->profile = $profile;
 
         return $this;
     }
@@ -473,6 +465,30 @@ class User implements UserInterface
                 $transactionBloquer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Profile[]
+     */
+    public function getProfiles(): Collection
+    {
+        return $this->profiles;
+    }
+
+    public function addProfile(Profile $profile): self
+    {
+        if (!$this->profiles->contains($profile)) {
+            $this->profiles[] = $profile;
+        }
+
+        return $this;
+    }
+
+    public function removeProfile(Profile $profile): self
+    {
+        $this->profiles->removeElement($profile);
 
         return $this;
     }

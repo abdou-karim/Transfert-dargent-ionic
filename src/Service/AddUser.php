@@ -24,6 +24,10 @@ class AddUser
     private $request;
     private $security;
     private $profileRepository;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     public function __construct(
 
@@ -31,7 +35,8 @@ class AddUser
                                 SerializerInterface $serializer,
                                 ValidatorInterface $validator,
                                 EntityManagerInterface $em,
-                                ProfileRepository $profileRepository
+                                ProfileRepository $profileRepository,
+                                UserRepository $userRepository
 
 )
 {
@@ -41,14 +46,16 @@ class AddUser
         $this->validator=$validator;
         $this->em=$em;
         $this->profileRepository=$profileRepository;
-    }
+    $this->userRepository = $userRepository;
+}
 
-    public function addUser(Request $request,$profile)
+    public function addUser(Request $request,$profile,$userByUsername=null)
     {
          $user = $request->request->all();
         $photo = $request->files->get("avatar");
         $user = $this->serializer->denormalize($user, "App\Entity\User", true);
         $profile = $this->profileRepository->findOneBy(['libelle'=>$profile]);
+        $userByUsername = $this->userRepository->findOneBy(['username'=>$userByUsername]);
             if ($photo) {
                 $photoBlob = fopen($photo->getRealPath(), "rb");
                 $user->setAvatar($photoBlob);
@@ -62,7 +69,7 @@ class AddUser
 //            $password = $user->getPlainPassword();
             $password = 'Sidibe123';
             $user->setPassword($this->encoder->encodePassword($user, $password));
-            $user->setProfile($profile);
+            $user->addProfile($profile);
             $user->setArchivage(false);
             if ($this->encoder->encodePassword($user, $password)) {
 

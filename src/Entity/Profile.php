@@ -44,7 +44,7 @@ class Profile
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups({"user:read", "user:write"})
-     * @Groups({"profile:read", "profile:write"})
+     * @Groups({"profile:read", "profile:write","getAllProfile"})
      */
     private $id;
 
@@ -52,7 +52,7 @@ class Profile
      * @ORM\Column(type="string", length=255)
      * @Groups({"user:read", "user:write"})
      * @Groups({"compte:read", "compte:write"})
-     * @Groups({"profile:read", "profile:write"})
+     * @Groups({"profile:read", "profile:write","getAllProfile"})
      */
     private $libelle;
 
@@ -63,8 +63,8 @@ class Profile
     private $archivage;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="profile")
-     * @Groups({"profile:read"})
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="profiles")
+     *  @Groups({"profile:read"})
      * @ApiSubresource()
      */
     private $users;
@@ -115,7 +115,7 @@ class Profile
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setProfile($this);
+            $user->addProfile($this);
         }
 
         return $this;
@@ -124,10 +124,7 @@ class Profile
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getProfile() === $this) {
-                $user->setProfile(null);
-            }
+            $user->removeProfile($this);
         }
 
         return $this;

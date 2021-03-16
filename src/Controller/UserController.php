@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class UserController extends AbstractController
 {
@@ -91,7 +92,7 @@ class UserController extends AbstractController
     public function addUserAgence(Request $request): Response{
         if($this->security->getUser()->getRoles()[0] === "ROLE_AdminAgence"){
 
-            return $this->addUser->addUser($request,'UtilisateurAgence');
+            return $this->addUser->addUser($request,'UtilisateurAgence',$request->request->get('username'));
         }else{
             return new JsonResponse('Seul les adminAgence sont autorise !',500);
         }
@@ -111,12 +112,30 @@ class UserController extends AbstractController
      */
     public function updateUserAgence(Request $request,int $id){
         $user = $this->userRepository->findOneBy(['id'=>$id]);
-        if($this->security->getUser()->getRoles()[0] === "ROLE_AdminAgence" && $user->getProfile()->getLibelle() ==="UtilisateurAgence")
+     /*   if($this->security->getUser()->getRoles()[0] === "ROLE_AdminAgence" && $user->getProfile()->getLibelle() ==="UtilisateurAgence")
         {
             return $this->updateUser->ModifierUser($request,$id);
         }
         else{
             return new JsonResponse('Seul les adminAgence sont autorise !',500);
-        }
+        }*/
+    }
+
+    /**
+     * @Route (
+     *     path="/api/log/username",
+     *     methods={"PUT"},
+     *
+     * )
+     */
+   public function getAllProfilByConnection(Request $request)
+    {
+        $requ = json_decode($request->getContent(),true);
+     $user=$this->userRepository->getAllProfileUser($requ['username']);
+     $profile = $user->getProfiles();
+     if(count($profile) > 1)
+     {
+         return $this->json($user);
+     }
     }
 }
