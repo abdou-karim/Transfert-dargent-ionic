@@ -27,6 +27,10 @@
           <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
           <ion-label>Bloquer Transaction</ion-label>
         </ion-item>
+        <ion-item button routerLink="/transaction-encours">
+          <ion-spinner name="crescent" slot="start"></ion-spinner>
+          <ion-label>Transaction en cours</ion-label>
+        </ion-item>
         <ion-item button>
           <ion-icon name="power-outline" slot="start"></ion-icon>
           <div class="ion-activatable ripple-parent" (click)="deconnexion()">

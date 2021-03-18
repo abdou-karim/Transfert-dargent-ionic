@@ -59,8 +59,8 @@ export class TransService {
         })
       );
   }
-  bloquerTransaction(code:object){
-    return this.http.put(`${this.API_URL}/transaction/bloquer`,code,this.httpOptions)
+  bloquerTransaction(code: object){
+    return this.http.put(`${this.API_URL}/transaction/bloquer`, code, this.httpOptions)
       .pipe(
         map(
           data => {
@@ -68,5 +68,13 @@ export class TransService {
           }
         )
       );
+  }
+  getTransactionEnCours()
+  {
+    return this.http.get(`${this.API_URL}/transaction/encours`).pipe(
+      map(data => {
+        return data;
+      })
+    );
   }
 }

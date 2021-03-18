@@ -23,6 +23,7 @@ ion-header{
     }
     .footer
     {
+      font-family: Cormorant Garamond, serif;
       margin: 0 auto;
       border-bottom: 5px solid $myBlue;
       width: 50%;
@@ -31,7 +32,7 @@ ion-header{
       {
         text-align: center;
         border-bottom: none;
-        font-size: 12px;
+        font-size: 10px;
       }
     }
   }
