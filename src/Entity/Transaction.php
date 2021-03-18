@@ -29,6 +29,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "security_message"="Acces non autorisé",
  *     "normalization_context"={"groups"={"trans_TTmcommission:read"}},
  *     },
+ *     "get_transaction_encours"={
+ *          "method"="GET",
+ *          "path"="/encours",
+ *            "security"= "is_granted('ROLE_UtilisateurAgence') or is_granted('ROLE_AdminAgence')",
+ *            "security_message"="Acces non autorisé",
+ *     },
  *
  *           "Recharge_compte"={
  *              "method"="POST",

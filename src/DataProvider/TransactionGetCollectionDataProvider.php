@@ -37,7 +37,8 @@ class TransactionGetCollectionDataProvider implements ContextAwareCollectionData
     }
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
-        if($operationName === "get_transaction_commision_agencePartenaire" || $operationName === "get_commision_utilisateurAgence")
+        if($operationName === "get_transaction_commision_agencePartenaire" || $operationName === "get_commision_utilisateurAgence"
+            || $operationName === "get_transaction_encours")
         {
             return Transaction::class === $resourceClass;
         }
@@ -68,6 +69,13 @@ class TransactionGetCollectionDataProvider implements ContextAwareCollectionData
             $userAgence = $this->security->getUser();
             $mesCommision = $this->transactionRepository->getCommissionUserAgence($userAgence->getId());
            return  $mesCommision;
+        }
+
+        if($operationName === "get_transaction_encours")
+        {
+            $userAgence = $this->security->getUser();
+            $transactionEnCours = $this->transactionRepository->getTransactionEnCours($userAgence->getId());
+            return $transactionEnCours;
         }
 
     }

@@ -23,12 +23,12 @@ class Frais {
     public function CreerMatricule($nom,$prenom)
     {
 
-        $num=intval(uniqid(rand(100,999)));
+        $num=intval(rand(100,999));
         $dernier=strlen($prenom);
         $avantDernier=$dernier-2;
         $cc=substr( $nom, 0,2);
         $ll=substr($prenom,$avantDernier,$dernier);
 
-        return date('Y').strtoupper($cc).strtoupper($ll).$num.rand(0,9);
+        return date('Y').strtoupper($cc).strtoupper($ll).$num;
     }
 }

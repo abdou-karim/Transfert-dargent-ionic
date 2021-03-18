@@ -83,4 +83,16 @@ class TransactionRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
         return $query;
     }
+    public function getTransactionEnCours($idUser)
+    {
+        $query = $this->createQueryBuilder('p')
+            ->select('p')
+            ->where('p.dateRetrait=null')
+            ->join('p.user','u')
+            ->where('u.id=:idUser')
+            ->setParameter('idUser',$idUser)
+            ->getQuery()
+            ->getResult();
+        return $query;
+    }
 }
