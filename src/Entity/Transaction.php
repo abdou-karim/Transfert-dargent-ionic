@@ -174,6 +174,11 @@ class Transaction
      */
     private $compte;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $statut;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -321,6 +326,18 @@ class Transaction
     public function setCompte(?Compte $compte): self
     {
         $this->compte = $compte;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(string $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

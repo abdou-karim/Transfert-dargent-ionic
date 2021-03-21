@@ -65,6 +65,7 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
                   $data->setPartEntreprise($partEntrePrise);
                   $data->setPartAgenceDepot($partAgenceDepot);
                   $data->setDateTransfert(new \DateTime('now'));
+                  $data->setStatut('encours');
                   $data->setUser($this->security->getUser());
                   $twilio->messages->create(
                       '221771659895',
@@ -100,11 +101,13 @@ class TransactionDataPersister implements  ContextAwareDataPersisterInterface
             $client->setCniBeneficiaire($data->getClient()->getCniBeneficiaire());
             if($code){
                $trans = new Transaction();
+               $transaction->setStatut('retirer');
                $trans->setUser($this->security->getUser());
                $trans->setCode($code);
                $trans->setMontant($transaction->getMontant());
                $trans->setDateTransfert($transaction->getDateTransfert());
                $trans->setType('retrait');
+               $trans->setStatut('retirer');
                $trans->setPartEtat($transaction->getPartEtat());
                $trans->setPartEntreprise($transaction->getPartEntreprise());
                $trans->setPartAgenceRetrait($transaction->getPartAgenceDepot()*2);

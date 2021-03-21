@@ -74,7 +74,7 @@ class TransactionGetCollectionDataProvider implements ContextAwareCollectionData
         if($operationName === "get_transaction_encours")
         {
             $userAgence = $this->security->getUser();
-            $transactionEnCours = $this->transactionRepository->getTransactionEnCours($userAgence->getId());
+            $transactionEnCours = $this->transactionRepository->getTransactionEnCours($userAgence->getId(),'encours');
             return $transactionEnCours;
         }
 
