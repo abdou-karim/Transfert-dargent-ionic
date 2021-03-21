@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-
+import { HTTP } from '@ionic-native/http/ngx';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +13,9 @@ export class TransService {
       'Content-Type': 'application/json'
     })
   };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private httpp: HTTP) { }
 
-  depot(client:object){
+  depot(client: object){
     return this.http.post(`${this.API_URL}/transaction/client`, client, this.httpOptions)
       .pipe(
         map(
@@ -51,12 +51,22 @@ export class TransService {
         })
       );
   }
-  getMesTranscation(){
+ // *
+  getMesTranscations(){
     return this.http.get(`${this.API_URL}/transaction/commisons_user`)
       .pipe(
         map( data => {
           return data;
         })
+      );
+  }
+  // */
+  getMesTranscation(){
+    return this.httpp.get(`${this.API_URL}/transaction/commisons_user`, {}, {})
+      .then(
+        data => {
+          return data.data;
+        }
       );
   }
   bloquerTransaction(code: object){

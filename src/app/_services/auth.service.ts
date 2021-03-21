@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Utilisateur} from '../_modeles/utilisateur';
+import {Storage} from '@ionic/storage';
+import {HTTP} from '@ionic-native/http/ngx';
 
 
 @Injectable({
@@ -16,33 +18,54 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<Utilisateur>;
   public currentUser: Observable<Utilisateur>;
   returnUrl: string;
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {
-    this.currentUserSubject = new BehaviorSubject<Utilisateur>(JSON.parse(localStorage.getItem('currentUser')));
+  constructor(private http: HttpClient, private router: Router,
+              private route: ActivatedRoute, private storage: Storage, private httpp: HTTP) {
+    this.currentUserSubject = new BehaviorSubject<any>(this.storage.get('currentUser'));
     this.currentUser = this.currentUserSubject.asObservable();
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
   public get currentUserValue(): Utilisateur {
     return this.currentUserSubject.value;
   }
-  login(username: string, password: string, role?: {}) {
+  // *
+  logins(username: string, password: string, role?: {}) {
     return this.http.post<any>(`${this.API_URL}/login`, { username, password, roles: role })
       .pipe(
         // tslint:disable-next-line:no-shadowed-variable
         map(Users => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(Users));
+         // localStorage.setItem('currentUser', JSON.stringify(Users));
+          this.storage.set('currentUser', JSON.stringify(Users));
           this.currentUserSubject.next(Users);
           this.decodeToken();
           return Users;
         }));
+  } // */
+  login(username: string, password: string, role?: {}) {
+    return this.httpp.post(`${this.API_URL}/login`, { username, password, roles: role }, {})
+      .then(
+        Users => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          // localStorage.setItem('currentUser', JSON.stringify(Users));
+          this.storage.set('currentUser', JSON.stringify(Users));
+          // @ts-ignore
+          this.currentUserSubject.next(Users);
+          this.decodeToken();
+          return Users;
+        }
+      );
   }
   logOut(){
     if (this.currentUserValue !== null){
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem(this.currentUserValue.token);
+      // localStorage.removeItem('currentUser');
+      this.storage.remove('currentUser');
+     // localStorage.removeItem(this.currentUserValue.token);
+      this.storage.remove(this.currentUserValue.token);
     }
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem(this.currentUserValue.token);
+     // localStorage.removeItem('currentUser');
+    this.storage.remove('currentUser');
+   // localStorage.removeItem(this.currentUserValue.token);
+    this.storage.remove(this.currentUserValue.token);
     // @ts-ignore
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TransService} from '../../_services/transactions/trans.service';
 import {Transaction} from '../../_modeles/transaction';
+import {Platform} from '@ionic/angular';
 
 @Component({
   selector: 'app-mes-transactions',
@@ -12,14 +13,14 @@ export class MesTransactionsPage implements OnInit {
   tabMontantTotal: number[] = [];
   MontantTotal: number;
 
-  constructor(private trans: TransService) { }
+  constructor(private trans: TransService, private platform: Platform) { }
 
   ngOnInit() {
     this.getMestransaction();
   }
-
-  getMestransaction(){
-    return this.trans.getMesTranscation()
+/*
+  getMestransactions(){
+    return this.trans.getMesTranscations()
       .subscribe(
         data => {
          this.transaction = data['hydra:member'];
@@ -30,7 +31,28 @@ export class MesTransactionsPage implements OnInit {
         }
       );
   }
-  addValue(a,b){
+  // */
+  getMestransaction(){
+    if (this.platform.is('cordova')) {
+      return this.trans.getMesTranscation().then(
+        data => {
+          console.log(data.data);
+        }
+      );
+    } else {
+      return this.trans.getMesTranscations()
+        .subscribe(
+          data => {
+            this.transaction = data['hydra:member'];
+            for (const oneTrnas of this.transaction) {
+              this.tabMontantTotal.push(Number(oneTrnas.montant));
+              this.MontantTotal = this.tabMontantTotal.reduce(this.addValue);
+            }
+          }
+        );
+    }
+  }
+  addValue(a, b){
     return a + b;
   }
 }

@@ -15,7 +15,7 @@ export class BloquerTransactionPage implements OnInit {
   etatRequest = false;
   code:string;
 
-  constructor(private fb: FormBuilder,private transS: TransService, private alertController: AlertController) { }
+  constructor(private fb: FormBuilder, private transS: TransService, private alertController: AlertController) { }
 
   ngOnInit() {
     this.bloquerTransaction = this.fb.group({
@@ -59,7 +59,7 @@ export class BloquerTransactionPage implements OnInit {
             header: 'Bloquer transaction',
             subHeader: 'INFOS',
             cssClass: 'basic-alert',
-            mode:'ios',
+            mode: 'ios',
             message: 'Votre transaction a ete bloquée avec succes'
           });
           await tranReussi.present();
@@ -70,7 +70,7 @@ export class BloquerTransactionPage implements OnInit {
             header: 'Erreur Bloquage transaction',
             subHeader: 'INFOS',
             cssClass: 'basic-alert',
-            mode:'ios',
+            mode: 'ios',
             message: 'Cette transaction sest deja retirée! <ion-icon name="alert-circle-outline" [color]="#e04055"></ion-icon> '
           });
           this.etatRequest = false;

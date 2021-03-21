@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../_services/auth.service';
-import {AlertController} from '@ionic/angular';
+import {AlertController, Platform} from '@ionic/angular';
 import {Profile} from '../../_modeles/Profile';
 import {Utilisateur} from '../../_modeles/utilisateur';
 
@@ -20,7 +20,8 @@ export class LoginPage implements OnInit {
   profile: Utilisateur;
   role = [];
 
-  constructor(private router: Router, private fb: FormBuilder, private authS: AuthService, private alertControll: AlertController) {
+  constructor(private router: Router, private fb: FormBuilder, private authS: AuthService,
+              private alertControll: AlertController, private platform: Platform) {
   }
 
   ngOnInit() {
@@ -57,19 +58,38 @@ export class LoginPage implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authS.login(this.f.username.value, this.f.password.value,  this.role)
-      .subscribe(() => {
-        },
-        async () => {
-          const alert = await this.alertControll.create({
-            cssClass: 'basic-alert',
-            header: 'Login ou Password *',
-            message: '' +
-              '<p>Vous n\'etes pas autorisé a vous connecter !</p><ion-spinner name="lines"></ion-spinner>',
-          });
+    if (this.platform.is('cordova')) {
+      this.authS.login(this.f.username.value, this.f.password.value,  this.role)
+        .then(() => {
+          },
+          async () => {
+            const alert = await this.alertControll.create({
+              cssClass: 'basic-alert',
+              header: 'Login ou Password *',
+              message: '' +
+                '<p>Vous n\'etes pas autorisé a vous connecter !</p><ion-spinner name="lines"></ion-spinner>',
+            });
 
-          await alert.present();
-        }
-      );
+            await alert.present();
+          }
+        );
+    }
+    else
+    {
+      this.authS.logins(this.f.username.value, this.f.password.value,  this.role)
+        .subscribe(() => {
+          },
+          async () => {
+            const alert = await this.alertControll.create({
+              cssClass: 'basic-alert',
+              header: 'Login ou Password *',
+              message: '' +
+                '<p>Vous n\'etes pas autorisé a vous connecter !</p><ion-spinner name="lines"></ion-spinner>',
+            });
+
+            await alert.present();
+          }
+        );
+    }
   }
 }

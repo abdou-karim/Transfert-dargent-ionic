@@ -19,34 +19,44 @@
   <ion-grid>
     <ion-row>
 
-      <ion-col>
+      <ion-col size="3">
         <ion-label>Date</ion-label>
         <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
       </ion-col>
 
-      <ion-col>
+      <ion-col size="3">
         <ion-label>Montant</ion-label>
         <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
       </ion-col>
 
-      <ion-col>
+      <ion-col size="4">
         <ion-label>Code</ion-label>
+        <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
+      </ion-col>
+      <ion-col size="2">
+        <ion-label>statut</ion-label>
         <ion-icon name="caret-down-outline" slot="end" color="primary"></ion-icon>
       </ion-col>
     </ion-row>
     <ion-card *ngFor="let trans of transactions">
       <ion-row >
 
-        <ion-col class="mcol">
+        <ion-col class="mcol" size="3">
           {{trans.dateTransfert | date}}
         </ion-col>
 
-        <ion-col class="mcol">
+        <ion-col class="mcol" size="3">
           {{trans.montant}}
         </ion-col>
 
-        <ion-col class="mcol">
+        <ion-col class="mcol" size="4">
           {{trans.code}}
+        </ion-col>
+
+        <ion-col class="mcol" size="2">
+         <ion-buttons role="button" (click)="annuler(trans.code)">
+           <ion-icon name="close-circle-outline" size="large"></ion-icon>
+         </ion-buttons>
         </ion-col>
       </ion-row>
     </ion-card>

@@ -13,6 +13,9 @@ import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import { FormatSoldePipe } from './pipes/solde/format-solde.pipe';
+import {IonicStorageModule} from '@ionic/storage';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import {HTTP} from '@ionic-native/http/ngx';
 
 @NgModule({
   declarations: [AppComponent, FormatSoldePipe],
@@ -25,10 +28,13 @@ import { FormatSoldePipe } from './pipes/solde/format-solde.pipe';
     HttpClientModule,
     FormsModule,
     SuperTabsModule.forRoot(),
-    SuperTabsModule
+    SuperTabsModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
+    SplashScreen,
+    HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
